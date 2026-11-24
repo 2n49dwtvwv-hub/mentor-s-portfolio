@@ -650,7 +650,7 @@ function renderSpotify(el) {
   el.innerHTML = `
     <div class="spot">
       <aside class="spot-side">
-        <div class="spot-brand">${GLYPHS.spotify}<span>Spotify</span></div>
+        <div class="spot-brand">${GLYPHS.spotifyapp}<span>Spotify</span></div>
         <p class="spot-h">${L("En ce moment", "On repeat")}</p>
         ${MUSIC.map((m, i) => `<button class="spot-item" data-i="${i}" style="--i:${i}">
             <span class="spot-num">${i + 1}</span>
