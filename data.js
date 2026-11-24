@@ -19,9 +19,9 @@ const PROFILE = {
   ],
   email: "m.mentor@outlook.fr",
   phone: "+33 7 68 75 52 18",
-  instagram: { handle: "@iammentor", url: "https://www.instagram.com/iammentor/" },
+  instagram: { handle: "@iammentorm", url: "https://www.instagram.com/iammentorm/" },
   links: [
-    { label: "Instagram", url: "https://www.instagram.com/iammentor/" },
+    { label: "Instagram", url: "https://www.instagram.com/iammentorm/" },
   ],
   cv: "assets/cv.pdf",              // le PDF à télécharger
   cvPreview: "assets/cv-apercu.webp", // l'image affichée dans la fenêtre CV.pdf
