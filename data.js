@@ -134,6 +134,72 @@ const VIDEOS = [
   },
 ];
 
+// Direction artistique (fenêtre façon Pinterest)
+// pins : [chemin de l'image sur i.pinimg.com, largeur, hauteur, couleur dominante]
+// project : slug du projet lié (affiche un bouton « Moodboard » dans ce projet)
+const MOODBOARDS = {
+  profile: "https://www.pinterest.com/iammentorm/",
+  boards: [
+    {
+      id: "kamiiinoo",
+      name: "Kamiiinoo",
+      project: "kamiiinoo",
+      url: "https://www.pinterest.com/iammentorm/kamino/",
+      count: 40,
+      pins: [
+        ["f7/9e/eb/f79eeb14e01f9bb99f42a336abd762ff.jpg", 474, 842, "#FFFFFF"],
+        ["3e/e6/7d/3ee67dfe263a36a5569323cd6ad6163a.jpg", 474, 474, "#F8F8F8"],
+        ["23/8d/50/238d5003a901679b7245ec7916f2344e.jpg", 474, 842, "#E5E5E5"],
+        ["33/a3/4b/33a34be288e996aac4d69df874605864.jpg", 474, 842, "#EDE7DC"],
+        ["ee/70/7b/ee707b989dfab832256d3d732670740d.jpg", 474, 474, "#393939"],
+        ["05/0a/1e/050a1e307494c2bd07aea27704da0478.jpg", 474, 434, "#FFFFFF"],
+        ["59/11/ba/5911ba3ab2b9ab0067ebfeb92c182ccf.jpg", 474, 302, "#DDBD88"],
+        ["3f/e6/71/3fe6715b8055cb132ad1797a951f0de3.jpg", 474, 355, "#FFFFFF"],
+        ["72/83/e4/7283e4453b2697d276c896d2de778de3.jpg", 474, 474, "#FFFFFF"],
+        ["75/f7/ff/75f7ff6b1234b85dd0ed7bfb93cce18e.jpg", 474, 842, "#FFFFFF"],
+      ],
+    },
+    {
+      id: "aiko-curly-care",
+      name: "Aiko Curly Care",
+      project: "aiko-curly-care",
+      url: "https://www.pinterest.com/iammentorm/reco-moodboard/",
+      count: 23,
+      pins: [
+        ["f2/88/72/f288722722eea5ae8f4f163645702966.jpg", 474, 592, "#191510"],
+        ["dc/94/07/dc9407c13879bf1863f00be307be61cb.jpg", 474, 544, "#7B4C25"],
+        ["c0/13/d5/c013d56aef062a5acfc5aa39cec99ec4.jpg", 474, 266, "#231611"],
+        ["14/7b/5b/147b5be44b84e7275ff5be6a3f193eff.jpg", 474, 266, "#53390D"],
+        ["89/39/fe/8939fef0fc24f5413c2e59e6b4f76a0c.jpg", 474, 266, "#498D15"],
+        ["e8/e8/26/e8e826c26000da9d7128c37c4a904caa.jpg", 474, 592, "#503D2C"],
+        ["a5/c0/67/a5c06794cc6a2cac4c2489ad714a2b33.jpg", 474, 631, "#533E2D"],
+        ["85/fb/98/85fb980b14f0f5ccc27baadb9fd97a2f.jpg", 474, 632, "#898A87"],
+        ["74/3a/4f/743a4f539b5093087e6619e165946975.jpg", 474, 286, "#9A7470"],
+        ["bb/19/da/bb19da5175583c566d56faee70f40cf9.jpg", 474, 266, "#563E36"],
+      ],
+    },
+    {
+      id: "photo-video",
+      name: "Photo & vidéo — tous les projets",
+      project: null,
+      url: "https://www.pinterest.com/iammentorm/moodboard-photovid%C3%A9o/",
+      count: 273,
+      pins: [
+        ["71/85/b9/7185b9acaa76dbb75676a5a73abdb856.jpg", 474, 474, "#FFFFFF"],
+        ["ee/a4/f8/eea4f8cb78fa66829e93c7fdc8675268.jpg", 474, 592, "#777345"],
+        ["da/33/c0/da33c07e3220eaf57b219c7203aa1cc6.jpg", 474, 711, "#000389"],
+        ["fc/e0/9c/fce09c72dacbfeb335e6b25cd64b1b99.jpg", 474, 842, "#6597D8"],
+        ["8c/7b/08/8c7b08a7ce6c96f84e1e12b0a7105cb2.jpg", 474, 842, "#FE1800"],
+        ["cb/01/82/cb01823693814253eb5fd970f852fe80.jpg", 474, 842, "#141718"],
+        ["9c/b4/80/9cb48063d26fffdfa24587e67c9ae4d4.jpg", 474, 711, "#302E16"],
+        ["84/3c/8a/843c8a6367fd8b7d1645390e0c777998.jpg", 474, 566, "#444441"],
+        ["20/a9/b5/20a9b5f2185d47b056b9aba77f384b63.jpg", 474, 592, "#6795B1"],
+        ["ce/4e/d6/ce4ed6ae3edb60ac182eeaa1d999c5b4.jpg", 474, 474, "#6C9B71"],
+      ],
+    },
+  ],
+};
+
 const SKILLS = [
   "Stratégie de communication & de marque",
   "Social media & community management",

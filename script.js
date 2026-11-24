@@ -16,6 +16,7 @@ const initials = (name) => name.split(/\s+/).map((w) => w[0]).join("").slice(0, 
 /* ---------- Icônes SVG ---------- */
 const ICONS = {
   folder: `<svg viewBox="0 0 64 52"><defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#86ccff"/><stop offset="1" stop-color="#3d9ef2"/></linearGradient></defs><path d="M3 9a4 4 0 0 1 4-4h15.5a4 4 0 0 1 2.8 1.2L29 10h28a4 4 0 0 1 4 4v4H3z" fill="#2f86d6"/><rect x="3" y="14" width="58" height="35" rx="4" fill="url(#fg)"/><rect x="3" y="14" width="58" height="1.5" fill="#fff" opacity=".5"/></svg>`,
+  pinterest: `<img src="assets/logos/pinterest.png" alt="">`,
   movie: `<svg viewBox="0 0 48 60"><path d="M7 1.5h25L45.5 15v41a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 56V4A2.5 2.5 0 0 1 7 1.5z" fill="#fff" stroke="#cfcfd4"/><path d="M32 1.5V12a3 3 0 0 0 3 3h10.5" fill="#ececf0" stroke="#cfcfd4"/><rect x="10" y="22" width="28" height="22" rx="3" fill="#1c1c1e"/><path d="M10 26h28M10 40h28" stroke="#3a3a3c" stroke-width="1"/><path d="M12 23.2h2M17 23.2h2M22 23.2h2M27 23.2h2M32 23.2h2M12 42.8h2M17 42.8h2M22 42.8h2M27 42.8h2M32 42.8h2" stroke="#fff" stroke-width="1.4"/><path d="M21 29l7 4-7 4z" fill="#fff"/></svg>`,
   doc: `<svg viewBox="0 0 48 60"><path d="M7 1.5h25L45.5 15v41a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 56V4A2.5 2.5 0 0 1 7 1.5z" fill="#fff" stroke="#cfcfd4"/><path d="M32 1.5V12a3 3 0 0 0 3 3h10.5" fill="#ececf0" stroke="#cfcfd4"/><path d="M11 24h26M11 30h26M11 36h26M11 42h18" stroke="#c3c3c9" stroke-width="2" stroke-linecap="round"/></svg>`,
   pdf: `<svg viewBox="0 0 48 60"><path d="M7 1.5h25L45.5 15v41a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 56V4A2.5 2.5 0 0 1 7 1.5z" fill="#fff" stroke="#cfcfd4"/><path d="M32 1.5V12a3 3 0 0 0 3 3h10.5" fill="#ececf0" stroke="#cfcfd4"/><path d="M11 22h26M11 28h20" stroke="#c3c3c9" stroke-width="2" stroke-linecap="round"/><rect x="2" y="36" width="30" height="13" rx="2.5" fill="#e5423a"/><text x="17" y="45.6" font-size="9" font-weight="700" fill="#fff" text-anchor="middle" font-family="Helvetica,Arial,sans-serif">PDF</text></svg>`,
@@ -28,6 +29,7 @@ const GLYPHS = {
   star: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>`,
   mail: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>`,
   doc: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M8.5 13h7M8.5 16.5h5" stroke="#e5423a" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  pinterest: `<img src="assets/logos/pinterest.png" alt="">`,
   play: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
   terminal: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l4 4-4 4M12 17h7"/></svg>`,
   trash: `<svg viewBox="0 0 24 24"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a9aa0"/><stop offset=".5" stop-color="#d9d9de"/><stop offset="1" stop-color="#8e8e94"/></linearGradient></defs><path d="M5 6.5h14l-1.3 13.2a1.5 1.5 0 0 1-1.5 1.3H7.8a1.5 1.5 0 0 1-1.5-1.3z" fill="url(#tg)" opacity=".9"/><ellipse cx="12" cy="6.5" rx="7.4" ry="1.6" fill="#77777d"/><path d="M8.5 9.5l.6 9M12 9.5v9M15.5 9.5l-.6 9" stroke="#6e6e74" stroke-width=".7"/></svg>`,
@@ -53,6 +55,7 @@ const APPS = {
   skills:   { title: "Compétences.txt", icon: "doc",     w: 860, h: 600, render: renderSkills },
   contact:  { title: "Contact.vcf",     icon: "contact", w: 880, h: 580, render: renderContact },
   videos:   { title: "Vidéos",          icon: "movie",   w: 1040, h: 720, render: renderVideos, dark: true },
+  moodboard:{ title: "Direction artistique", icon: "pinterest", w: 1060, h: 780, render: renderMoodboard },
   cv:       { title: "CV.pdf",          icon: "pdf",     w: 640, h: 860, render: renderCV },
   terminal: { title: `${PROFILE.username} — zsh`, icon: null, w: 600, h: 380, render: renderTerminal, dark: true },
   trash:    { title: "Corbeille", icon: null, w: 460, h: 300, render: (el) => {
@@ -70,7 +73,7 @@ function getApp(id) {
 }
 
 /* Icônes affichées sur le bureau */
-const DESKTOP_ITEMS = ["about", "projects", "skills", "contact", "videos", "cv"];
+const DESKTOP_ITEMS = ["about", "projects", "skills", "moodboard", "videos", "contact", "cv"];
 
 /* Icônes du dock */
 const DOCK_ITEMS = [
@@ -79,6 +82,7 @@ const DOCK_ITEMS = [
   { id: "skills",   label: "Compétences", glyph: "star",     bg: "linear-gradient(160deg,#b38cff,#6a3cff)" },
   { id: "contact",  label: "Contact",     glyph: "mail",     bg: "linear-gradient(160deg,#6ee7b7,#10a37f)" },
   { id: "videos",   label: "Vidéos",      glyph: "play",     bg: "linear-gradient(160deg,#ff6b8b,#d6153f)" },
+  { id: "moodboard", label: "Direction artistique", glyph: "pinterest", bg: "#fff" },
   "sep",
   { id: "cv",       label: "CV",          glyph: "doc",      bg: "linear-gradient(160deg,#ff8a80,#e5423a)" },
   { id: "terminal", label: "Terminal",    glyph: "terminal", bg: "linear-gradient(160deg,#4a4a4f,#1c1c1e)" },
@@ -134,6 +138,7 @@ function openWindow(id) {
 
   winLayer.appendChild(win);
   if (id === "videos" && typeof pendingVideo !== "undefined" && pendingVideo) { win.dataset.pending = pendingVideo; pendingVideo = null; }
+  if (id === "moodboard" && typeof pendingBoard !== "undefined" && pendingBoard) { win.dataset.board = pendingBoard; pendingBoard = null; }
   app.render($(".content", win), win);
   openWindows.set(id, win);
   focusWindow(win);
@@ -491,7 +496,11 @@ function linkButtons(p, cls = "") {
   const vbtn = vids.length
     ? `<button class="proj-btn video" data-video="${vids[0].id}" data-a="up" style="--d:1250ms">${GLYPHS.play}<span>Voir la vidéo</span></button>`
     : "";
-  return vbtn + Object.entries(p.links || {}).map(([k, url], i) =>
+  const board = (typeof MOODBOARDS !== "undefined" ? MOODBOARDS.boards : []).find((b) => b.project === p.slug);
+  const mbtn = board
+    ? `<button class="proj-btn moodboard" data-board="${board.id}" data-a="up" style="--d:1280ms"><img src="assets/logos/pinterest.png" alt=""><span>Moodboard</span></button>`
+    : "";
+  return vbtn + mbtn + Object.entries(p.links || {}).map(([k, url], i) =>
     `<a class="proj-btn ${k} ${cls}" href="${url}" target="_blank" rel="noopener" data-a="up" style="--d:${1300 + i * 100}ms">
       ${LINK_ICONS[k] || ""}<span>${LINK_LABELS[k] || k}</span></a>`).join("");
 }
@@ -635,6 +644,117 @@ let pendingVideo = null;
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-video]");
   if (b) openVideo(b.dataset.video);
+});
+
+/* ---------- Direction artistique (façon Pinterest) ---------- */
+const pinImg = (path, size = "474x") => `https://i.pinimg.com/${size}/${path}`;
+let pendingBoard = null;
+
+function renderMoodboard(el, win) {
+  el.classList.add("pin-app");
+  const boards = MOODBOARDS.boards;
+  const total = boards.reduce((n, b) => n + b.count, 0);
+  el.innerHTML = `
+    <header class="pin-top">
+      <img class="pin-logo" src="assets/logos/pinterest.png" alt="Pinterest">
+      <div class="pin-search">${GLYPHS.star.replace('fill="#fff"', 'fill="#767676"')}<span>Direction artistique de ${PROFILE.name}</span></div>
+      <a class="pin-follow" href="${MOODBOARDS.profile}" target="_blank" rel="noopener">Voir mon Pinterest</a>
+    </header>
+    <div class="pin-profile">
+      <img class="pin-avatar" src="${PROFILE.avatar}" alt="">
+      <h1>Direction artistique</h1>
+      <p>Moodboards et recherches visuelles · ${boards.length} tableaux · ${total} épingles</p>
+    </div>
+    <nav class="pin-tabs" role="tablist">
+      <button class="pin-tab" data-board="all">Tous</button>
+      ${boards.map((b) => `<button class="pin-tab" data-board="${b.id}">${b.name}</button>`).join("")}
+    </nav>
+    <div class="pin-grid"></div>
+    <div class="pin-more"></div>`;
+  const grid = $(".pin-grid", el), more = $(".pin-more", el);
+  let list = [];
+
+  const show = (id) => {
+    el.querySelectorAll(".pin-tab").forEach((t) => t.classList.toggle("active", t.dataset.board === id));
+    const sel = id === "all" ? boards : boards.filter((b) => b.id === id);
+    // en mode « Tous », on alterne les tableaux pour mélanger les images
+    list = [];
+    const max = Math.max(...sel.map((b) => b.pins.length));
+    for (let i = 0; i < max; i++) sel.forEach((b) => b.pins[i] && list.push({ b, p: b.pins[i] }));
+    grid.innerHTML = list.map(({ b, p }, i) => `
+      <div class="pin" role="button" tabindex="0" data-i="${i}" style="--c:${p[3]};--i:${i % 12};aspect-ratio:${p[1]} / ${p[2]}">
+        <img src="${pinImg(p[0])}" alt="Épingle du tableau ${b.name}" loading="lazy">
+        <a class="pin-save" href="${b.url}" target="_blank" rel="noopener">Ouvrir</a>
+        <span class="pin-board">${b.name}</span>
+      </div>`).join("");
+    grid.querySelectorAll("img").forEach((img) => {
+      const pin = img.parentElement;
+      const done = () => pin.classList.add("in");
+      img.complete ? done() : (img.addEventListener("load", done), img.addEventListener("error", () => pin.classList.add("in", "broken")));
+    });
+    setTimeout(() => grid.querySelectorAll(".pin:not(.in)").forEach((p) => p.classList.add("in")), 2500);
+    more.innerHTML = sel.map((b) => `<a class="pin-more-btn" href="${b.url}" target="_blank" rel="noopener">
+      Voir les ${b.count} épingles de « ${b.name} » sur Pinterest ↗</a>`).join("");
+    el.scrollTo({ top: 0 });
+  };
+
+  /* Visionneuse plein écran */
+  const openLightbox = (i) => {
+    const lb = document.createElement("div");
+    lb.className = "pin-lightbox";
+    lb.innerHTML = `
+      <button class="lb-close" aria-label="Fermer">×</button>
+      <button class="lb-nav prev" aria-label="Précédente">‹</button>
+      <figure><img alt=""><figcaption></figcaption></figure>
+      <button class="lb-nav next" aria-label="Suivante">›</button>`;
+    document.body.appendChild(lb);
+    const img = $("img", lb), cap = $("figcaption", lb);
+    const go = (k) => {
+      i = (k + list.length) % list.length;
+      const { b, p } = list[i];
+      img.classList.remove("in");
+      img.style.setProperty("--c", p[3]);
+      img.style.aspectRatio = `${p[1]} / ${p[2]}`;
+      img.onload = () => img.classList.add("in");
+      img.src = pinImg(p[0], "736x");
+      cap.innerHTML = `<span>${b.name}</span><span>${i + 1} / ${list.length}</span><a href="${b.url}" target="_blank" rel="noopener">Voir le tableau ↗</a>`;
+    };
+    const close = () => { lb.classList.remove("show"); document.removeEventListener("keydown", key); setTimeout(() => lb.remove(), 300); };
+    const key = (e) => { if (e.key === "Escape") close(); if (e.key === "ArrowRight") go(i + 1); if (e.key === "ArrowLeft") go(i - 1); };
+    document.addEventListener("keydown", key);
+    lb.addEventListener("click", (e) => {
+      if (e.target.closest(".lb-close") || e.target === lb) close();
+      else if (e.target.closest(".prev")) go(i - 1);
+      else if (e.target.closest(".next")) go(i + 1);
+    });
+    go(i);
+    requestAnimationFrame(() => lb.classList.add("show"));
+  };
+
+  el.addEventListener("click", (e) => {
+    const tab = e.target.closest(".pin-tab");
+    if (tab) return show(tab.dataset.board);
+    if (e.target.closest(".pin-save")) return;
+    const pin = e.target.closest(".pin");
+    if (pin) openLightbox(+pin.dataset.i);
+  });
+  el.addEventListener("keydown", (e) => {
+    const pin = e.target.closest(".pin");
+    if (pin && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openLightbox(+pin.dataset.i); }
+  });
+  win._show = show;
+  show(win.dataset.board || "all");
+}
+
+function openBoard(id) {
+  const w = openWindows.get("moodboard");
+  if (w && w._show) { w._show(id); openWindow("moodboard"); return; }
+  pendingBoard = id;
+  openWindow("moodboard");
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-board]");
+  if (b && !b.closest(".pin-app")) openBoard(b.dataset.board);
 });
 
 function renderSkills(el) {
