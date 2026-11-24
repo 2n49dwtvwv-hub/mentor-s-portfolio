@@ -31,6 +31,9 @@ const GLYPHS = {
   doc: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M8.5 13h7M8.5 16.5h5" stroke="#e5423a" stroke-width="1.6" stroke-linecap="round"/></svg>`,
   pinterest: `<img src="assets/logos/pinterest.png" alt="">`,
   contacts: `<img src="assets/logos/contacts.png" alt="">`,
+  preview: `<img src="assets/logos/preview.png" alt="">`,
+  mailapp: `<img src="assets/logos/mail.png" alt="">`,
+  notes: `<img src="assets/logos/notes.png" alt="">`,
   finder: `<img src="assets/logos/finder.png" alt="">`,
   quicktime: `<img src="assets/logos/quicktime.png" alt="">`,
   play: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
@@ -54,6 +57,7 @@ const GLYPHS = {
 /* ---------- Applications / fenêtres ---------- */
 const APPS = {
   about:    { title: "À propos.txt",    icon: "doc",     w: 940, h: 640, render: renderAbout },
+  finder:   { title: "Finder",          icon: null,      w: 920, h: 640, render: renderFinder },
   projects: { title: "Projets",         icon: "folder",  w: 900, h: 720, render: renderProjects },
   skills:   { title: "Compétences.txt", icon: "doc",     w: 860, h: 600, render: renderSkills },
   contact:  { title: "Contact.vcf",     icon: "contact", w: 880, h: 580, render: renderContact },
@@ -80,14 +84,15 @@ const DESKTOP_ITEMS = ["about", "projects", "skills", "moodboard", "videos", "co
 
 /* Icônes du dock */
 const DOCK_ITEMS = [
-  { id: "projects", label: "Projets",     glyph: "finder",   bg: "transparent", plain: true },
+  { id: "finder",   label: "Finder",      glyph: "finder",   bg: "transparent", plain: true },
+  { id: "projects", label: "Projets",     glyph: "folder",   bg: "linear-gradient(160deg,#5ac8fa,#0a6cff)" },
   { id: "about",    label: "À propos",    glyph: "contacts", bg: "transparent", plain: true },
-  { id: "skills",   label: "Compétences", glyph: "star",     bg: "linear-gradient(160deg,#b38cff,#6a3cff)" },
-  { id: "contact",  label: "Contact",     glyph: "mail",     bg: "linear-gradient(160deg,#6ee7b7,#10a37f)" },
+  { id: "skills",   label: "Compétences", glyph: "notes",    bg: "transparent", plain: true },
+  { id: "contact",  label: "Contact",     glyph: "mailapp",  bg: "transparent", plain: true },
   { id: "videos",   label: "Vidéos",      glyph: "quicktime", bg: "transparent", plain: true },
   { id: "moodboard", label: "Direction artistique", glyph: "pinterest", bg: "#fff" },
   "sep",
-  { id: "cv",       label: "CV",          glyph: "doc",      bg: "linear-gradient(160deg,#ff8a80,#e5423a)" },
+  { id: "cv",       label: "CV",          glyph: "preview",  bg: "transparent", plain: true },
   { id: "terminal", label: "Terminal",    glyph: "terminal", bg: "linear-gradient(160deg,#4a4a4f,#1c1c1e)" },
   "sep",
   { skill: "finalcut", label: "Final Cut Pro",        glyph: "finalcut", bg: "transparent", plain: true },
@@ -568,6 +573,49 @@ function renderProject(el, p) {
       </div>
     </section>`;
   setupAnims(el);
+}
+
+/* ---------- Finder : accès à tout le portfolio ---------- */
+function renderFinder(el) {
+  const fileBtn = (id) => {
+    const app = APPS[id];
+    return `<button class="fi-file" data-open="${id}"><span class="fi-icon">${ICONS[app.icon]}</span><span class="fi-name">${app.title}</span></button>`;
+  };
+  const sections = {
+    all: { label: "Tout", glyph: "star" },
+    docs: { label: "Documents", glyph: "user" },
+    projects: { label: "Projets", glyph: "folder" },
+    media: { label: "Médias", glyph: "play" },
+  };
+  el.innerHTML = `
+    <div class="finder">
+      <aside>
+        <p class="side-h">Favoris</p>
+        ${Object.entries(sections).map(([k, v]) => `<button class="side-link" data-sec="${k}">${GLYPHS[v.glyph].replace(/fill="#fff"/g, 'fill="#0a84ff"')}${v.label}</button>`).join("")}
+        <p class="side-h">Liens</p>
+        <a class="side-link" href="${PROFILE.instagram.url}" target="_blank" rel="noopener">${LINK_ICONS.instagram}Instagram</a>
+        <a class="side-link" href="mailto:${PROFILE.email}">${GLYPHS.mail.replace('stroke="#fff"', 'stroke="#0a84ff"')}E-mail</a>
+      </aside>
+      <div class="finder-body"><div class="finder-main fi-main"></div><div class="finder-status"></div></div>
+    </div>`;
+  const main = $(".fi-main", el), status = $(".finder-status", el);
+  const show = (sec) => {
+    el.querySelectorAll(".side-link[data-sec]").forEach((b) => b.classList.toggle("active", b.dataset.sec === sec));
+    const parts = [];
+    let n = 0;
+    if (sec === "all" || sec === "docs") { const ids = ["about", "skills", "contact", "cv"]; n += ids.length; parts.push(`<h3 class="fi-h">Documents</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
+    if (sec === "all" || sec === "projects") {
+      n += PROJECTS.length + 1;
+      parts.push(`<h3 class="fi-h">Projets</h3><div class="fi-grid">${fileBtn("projects")}${PROJECTS.map((p) => `
+        <button class="fi-file" data-open="project:${p.slug}"><span class="fi-icon fi-thumb" style="background-image:url('${p.thumb}')"></span><span class="fi-name">${p.title}</span></button>`).join("")}</div>`);
+    }
+    if (sec === "all" || sec === "media") { const ids = ["videos", "moodboard"]; n += ids.length; parts.push(`<h3 class="fi-h">Médias</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
+    main.innerHTML = parts.join("");
+    main.querySelectorAll(".fi-file").forEach((f, i) => f.style.setProperty("--i", i));
+    status.textContent = `${n} éléments`;
+  };
+  el.addEventListener("click", (e) => { const b = e.target.closest("[data-sec]"); if (b) show(b.dataset.sec); });
+  show("all");
 }
 
 /* ---------- Application « Vidéos » (façon QuickTime) ---------- */

@@ -796,6 +796,29 @@ iframe.cv { width: 100%; height: 100%; border: 0; display: block; }
 .proj-btn.moodboard img { width: 16px; height: 16px; border-radius: 50%; background: #fff; }
 .icon .img img { width: 100%; height: 100%; object-fit: contain; }
 
+/* --- Finder --- */
+.side-link svg { fill: none; }
+.side-link svg[fill="#0a84ff"] { fill: #0a84ff; }
+a.side-link { color: var(--text); text-decoration: none; }
+a.side-link svg { color: #0a84ff; }
+.fi-main { display: block !important; }
+.fi-h { font-size: 12px; font-weight: 600; color: #8e8e93; margin: 4px 4px 10px; }
+.fi-h:not(:first-child) { margin-top: 22px; }
+.fi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+.fi-file {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 4px; border: 0; border-radius: 10px;
+  background: none; cursor: pointer; font: inherit;
+  animation: fiIn .5s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(var(--i) * 30ms);
+}
+@keyframes fiIn { from { opacity: 0; transform: translateY(8px) scale(.95); } to { opacity: 1; transform: none; } }
+.fi-file:hover { background: rgba(10, 132, 255, .1); }
+.fi-file:focus-visible .fi-name { background: #2a6fdb; color: #fff; }
+.fi-icon { width: 64px; height: 64px; display: grid; place-items: center; transition: transform .25s cubic-bezier(.34, 1.56, .64, 1); filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .2)); }
+.fi-icon svg, .fi-icon img { width: 100%; height: 100%; object-fit: contain; }
+.fi-thumb { width: 92px; height: 58px; border-radius: 6px; background: #eee center / cover; }
+.fi-file:hover .fi-icon { transform: scale(1.08); }
+.fi-name { font-size: 12px; text-align: center; padding: 1px 6px; border-radius: 4px; }
+
 /* --- Fenêtre étroite (mobile ou fenêtre réduite) --- */
 @container (max-width: 640px) {
   .about-grid { grid-template-columns: 1fr; }
@@ -857,8 +880,8 @@ iframe.cv { width: 100%; height: 100%; border: 0; display: block; }
   }
   .finder aside { display: none; }
   .finder-main { grid-template-columns: repeat(2, 1fr); padding: 14px; }
-  #dock { height: auto; gap: 3px; padding: 6px 6px 7px; }
-  .dock-item { --size: min(44px, calc((100vw - 84px) / 11)) !important; }
+  #dock { height: auto; gap: 2px; padding: 5px 5px 7px; max-width: calc(100vw - 8px); }
+  .dock-item { --size: min(44px, calc((100vw - 60px) / 12.6)) !important; }
   .dock-item[data-app="terminal"], .dock-item[data-app="trash"], .dock-sep:nth-last-child(2) { display: none; }
   .dock-item::before { display: none; }
   .dock-sep { height: 30px; margin: 0 2px 4px; }
