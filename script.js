@@ -30,6 +30,9 @@ const GLYPHS = {
   mail: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>`,
   doc: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M8.5 13h7M8.5 16.5h5" stroke="#e5423a" stroke-width="1.6" stroke-linecap="round"/></svg>`,
   pinterest: `<img src="assets/logos/pinterest.png" alt="">`,
+  contacts: `<img src="assets/logos/contacts.png" alt="">`,
+  finder: `<img src="assets/logos/finder.png" alt="">`,
+  quicktime: `<img src="assets/logos/quicktime.png" alt="">`,
   play: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
   terminal: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l4 4-4 4M12 17h7"/></svg>`,
   trash: `<svg viewBox="0 0 24 24"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a9aa0"/><stop offset=".5" stop-color="#d9d9de"/><stop offset="1" stop-color="#8e8e94"/></linearGradient></defs><path d="M5 6.5h14l-1.3 13.2a1.5 1.5 0 0 1-1.5 1.3H7.8a1.5 1.5 0 0 1-1.5-1.3z" fill="url(#tg)" opacity=".9"/><ellipse cx="12" cy="6.5" rx="7.4" ry="1.6" fill="#77777d"/><path d="M8.5 9.5l.6 9M12 9.5v9M15.5 9.5l-.6 9" stroke="#6e6e74" stroke-width=".7"/></svg>`,
@@ -77,11 +80,11 @@ const DESKTOP_ITEMS = ["about", "projects", "skills", "moodboard", "videos", "co
 
 /* Icônes du dock */
 const DOCK_ITEMS = [
-  { id: "about",    label: "À propos",    glyph: "user",     bg: "linear-gradient(160deg,#ffd166,#ff9f1c)" },
-  { id: "projects", label: "Projets",     glyph: "folder",   bg: "linear-gradient(160deg,#5ac8fa,#0a6cff)" },
+  { id: "projects", label: "Projets",     glyph: "finder",   bg: "transparent", plain: true },
+  { id: "about",    label: "À propos",    glyph: "contacts", bg: "transparent", plain: true },
   { id: "skills",   label: "Compétences", glyph: "star",     bg: "linear-gradient(160deg,#b38cff,#6a3cff)" },
   { id: "contact",  label: "Contact",     glyph: "mail",     bg: "linear-gradient(160deg,#6ee7b7,#10a37f)" },
-  { id: "videos",   label: "Vidéos",      glyph: "play",     bg: "linear-gradient(160deg,#ff6b8b,#d6153f)" },
+  { id: "videos",   label: "Vidéos",      glyph: "quicktime", bg: "transparent", plain: true },
   { id: "moodboard", label: "Direction artistique", glyph: "pinterest", bg: "#fff" },
   "sep",
   { id: "cv",       label: "CV",          glyph: "doc",      bg: "linear-gradient(160deg,#ff8a80,#e5423a)" },
