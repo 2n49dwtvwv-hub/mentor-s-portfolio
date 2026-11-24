@@ -16,6 +16,7 @@ const initials = (name) => name.split(/\s+/).map((w) => w[0]).join("").slice(0, 
 /* ---------- Icônes SVG ---------- */
 const ICONS = {
   folder: `<svg viewBox="0 0 64 52"><defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#86ccff"/><stop offset="1" stop-color="#3d9ef2"/></linearGradient></defs><path d="M3 9a4 4 0 0 1 4-4h15.5a4 4 0 0 1 2.8 1.2L29 10h28a4 4 0 0 1 4 4v4H3z" fill="#2f86d6"/><rect x="3" y="14" width="58" height="35" rx="4" fill="url(#fg)"/><rect x="3" y="14" width="58" height="1.5" fill="#fff" opacity=".5"/></svg>`,
+  movie: `<svg viewBox="0 0 48 60"><path d="M7 1.5h25L45.5 15v41a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 56V4A2.5 2.5 0 0 1 7 1.5z" fill="#fff" stroke="#cfcfd4"/><path d="M32 1.5V12a3 3 0 0 0 3 3h10.5" fill="#ececf0" stroke="#cfcfd4"/><rect x="10" y="22" width="28" height="22" rx="3" fill="#1c1c1e"/><path d="M10 26h28M10 40h28" stroke="#3a3a3c" stroke-width="1"/><path d="M12 23.2h2M17 23.2h2M22 23.2h2M27 23.2h2M32 23.2h2M12 42.8h2M17 42.8h2M22 42.8h2M27 42.8h2M32 42.8h2" stroke="#fff" stroke-width="1.4"/><path d="M21 29l7 4-7 4z" fill="#fff"/></svg>`,
   doc: `<svg viewBox="0 0 48 60"><path d="M7 1.5h25L45.5 15v41a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 56V4A2.5 2.5 0 0 1 7 1.5z" fill="#fff" stroke="#cfcfd4"/><path d="M32 1.5V12a3 3 0 0 0 3 3h10.5" fill="#ececf0" stroke="#cfcfd4"/><path d="M11 24h26M11 30h26M11 36h26M11 42h18" stroke="#c3c3c9" stroke-width="2" stroke-linecap="round"/></svg>`,
   pdf: `<svg viewBox="0 0 48 60"><path d="M7 1.5h25L45.5 15v41a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 56V4A2.5 2.5 0 0 1 7 1.5z" fill="#fff" stroke="#cfcfd4"/><path d="M32 1.5V12a3 3 0 0 0 3 3h10.5" fill="#ececf0" stroke="#cfcfd4"/><path d="M11 22h26M11 28h20" stroke="#c3c3c9" stroke-width="2" stroke-linecap="round"/><rect x="2" y="36" width="30" height="13" rx="2.5" fill="#e5423a"/><text x="17" y="45.6" font-size="9" font-weight="700" fill="#fff" text-anchor="middle" font-family="Helvetica,Arial,sans-serif">PDF</text></svg>`,
   contact: `<svg viewBox="0 0 60 48"><rect x="2" y="2" width="56" height="44" rx="6" fill="#fff" stroke="#cfcfd4"/><circle cx="19" cy="19" r="7" fill="#8e8e93"/><path d="M8 38c1.5-6.5 6-9.5 11-9.5s9.5 3 11 9.5z" fill="#8e8e93"/><path d="M36 17h15M36 24h15M36 31h10" stroke="#c3c3c9" stroke-width="2.5" stroke-linecap="round"/></svg>`,
@@ -27,6 +28,7 @@ const GLYPHS = {
   star: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>`,
   mail: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>`,
   doc: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M8.5 13h7M8.5 16.5h5" stroke="#e5423a" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  play: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
   terminal: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l4 4-4 4M12 17h7"/></svg>`,
   trash: `<svg viewBox="0 0 24 24"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a9aa0"/><stop offset=".5" stop-color="#d9d9de"/><stop offset="1" stop-color="#8e8e94"/></linearGradient></defs><path d="M5 6.5h14l-1.3 13.2a1.5 1.5 0 0 1-1.5 1.3H7.8a1.5 1.5 0 0 1-1.5-1.3z" fill="url(#tg)" opacity=".9"/><ellipse cx="12" cy="6.5" rx="7.4" ry="1.6" fill="#77777d"/><path d="M8.5 9.5l.6 9M12 9.5v9M15.5 9.5l-.6 9" stroke="#6e6e74" stroke-width=".7"/></svg>`,
   /* Logiciels */
@@ -50,6 +52,7 @@ const APPS = {
   projects: { title: "Projets",         icon: "folder",  w: 900, h: 720, render: renderProjects },
   skills:   { title: "Compétences.txt", icon: "doc",     w: 860, h: 600, render: renderSkills },
   contact:  { title: "Contact.vcf",     icon: "contact", w: 880, h: 580, render: renderContact },
+  videos:   { title: "Vidéos",          icon: "movie",   w: 1040, h: 720, render: renderVideos, dark: true },
   cv:       { title: "CV.pdf",          icon: "pdf",     w: 640, h: 860, render: renderCV },
   terminal: { title: `${PROFILE.username} — zsh`, icon: null, w: 600, h: 380, render: renderTerminal, dark: true },
   trash:    { title: "Corbeille", icon: null, w: 460, h: 300, render: (el) => {
@@ -67,7 +70,7 @@ function getApp(id) {
 }
 
 /* Icônes affichées sur le bureau */
-const DESKTOP_ITEMS = ["about", "projects", "skills", "contact", "cv"];
+const DESKTOP_ITEMS = ["about", "projects", "skills", "contact", "videos", "cv"];
 
 /* Icônes du dock */
 const DOCK_ITEMS = [
@@ -75,6 +78,7 @@ const DOCK_ITEMS = [
   { id: "projects", label: "Projets",     glyph: "folder",   bg: "linear-gradient(160deg,#5ac8fa,#0a6cff)" },
   { id: "skills",   label: "Compétences", glyph: "star",     bg: "linear-gradient(160deg,#b38cff,#6a3cff)" },
   { id: "contact",  label: "Contact",     glyph: "mail",     bg: "linear-gradient(160deg,#6ee7b7,#10a37f)" },
+  { id: "videos",   label: "Vidéos",      glyph: "play",     bg: "linear-gradient(160deg,#ff6b8b,#d6153f)" },
   "sep",
   { id: "cv",       label: "CV",          glyph: "doc",      bg: "linear-gradient(160deg,#ff8a80,#e5423a)" },
   { id: "terminal", label: "Terminal",    glyph: "terminal", bg: "linear-gradient(160deg,#4a4a4f,#1c1c1e)" },
@@ -129,6 +133,7 @@ function openWindow(id) {
   win.style.top = Math.max(10, (area.height - 90 - h) / 2 - 40 + step) + "px";
 
   winLayer.appendChild(win);
+  if (id === "videos" && typeof pendingVideo !== "undefined" && pendingVideo) { win.dataset.pending = pendingVideo; pendingVideo = null; }
   app.render($(".content", win), win);
   openWindows.set(id, win);
   focusWindow(win);
@@ -482,7 +487,11 @@ function itemHTML(it) {
 }
 
 function linkButtons(p, cls = "") {
-  return Object.entries(p.links || {}).map(([k, url], i) =>
+  const vids = (typeof VIDEOS !== "undefined" ? VIDEOS : []).filter((v) => v.project === p.slug);
+  const vbtn = vids.length
+    ? `<button class="proj-btn video" data-video="${vids[0].id}" data-a="up" style="--d:1250ms">${GLYPHS.play}<span>Voir la vidéo</span></button>`
+    : "";
+  return vbtn + Object.entries(p.links || {}).map(([k, url], i) =>
     `<a class="proj-btn ${k} ${cls}" href="${url}" target="_blank" rel="noopener" data-a="up" style="--d:${1300 + i * 100}ms">
       ${LINK_ICONS[k] || ""}<span>${LINK_LABELS[k] || k}</span></a>`).join("");
 }
@@ -548,6 +557,85 @@ function renderProject(el, p) {
     </section>`;
   setupAnims(el);
 }
+
+/* ---------- Application « Vidéos » (façon QuickTime) ---------- */
+const PLATFORM = { youtube: "YouTube", instagram: "Instagram" };
+function videoEmbed(v) {
+  if (v.platform === "youtube")
+    return `<iframe src="https://www.youtube-nocookie.com/embed/${v.videoId}?rel=0&modestbranding=1&playsinline=1"
+      title="${v.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen loading="lazy"></iframe>`;
+  return `<iframe src="https://www.instagram.com/reel/${v.videoId}/embed/" title="${v.title}"
+      allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen loading="lazy" scrolling="no"></iframe>`;
+}
+function videoUrl(v) {
+  return v.platform === "youtube" ? `https://www.youtube.com/watch?v=${v.videoId}` : `https://www.instagram.com/reel/${v.videoId}/`;
+}
+function videoThumb(v) {
+  if (v.platform === "youtube") return `https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg`;
+  return PROJECTS.find((p) => p.slug === v.project)?.thumb || "";
+}
+
+function renderVideos(el, win) {
+  el.classList.add("vids-app");
+  el.innerHTML = `
+    <div class="vids">
+      <div class="vid-main">
+        <div class="vid-stage"></div>
+        <div class="vid-info"></div>
+      </div>
+      <aside class="vid-list">
+        <p class="vid-list-h">${VIDEOS.length} vidéos</p>
+        ${VIDEOS.map((v, i) => {
+          const p = PROJECTS.find((x) => x.slug === v.project);
+          return `<button class="vid-item" data-id="${v.id}" style="--i:${i}">
+            <span class="vid-thumb" style="background-image:url('${videoThumb(v)}')"><span class="vid-play">${GLYPHS.play}</span></span>
+            <span class="vid-meta"><strong>${v.title}</strong><span>${p ? p.title : ""} · ${PLATFORM[v.platform]}</span></span>
+          </button>`;
+        }).join("")}
+      </aside>
+    </div>`;
+  const stage = $(".vid-stage", el), info = $(".vid-info", el);
+  const select = (id) => {
+    const v = VIDEOS.find((x) => x.id === id) || VIDEOS[0];
+    if (!v) return;
+    const p = PROJECTS.find((x) => x.slug === v.project);
+    el.querySelectorAll(".vid-item").forEach((b) => b.classList.toggle("active", b.dataset.id === v.id));
+    stage.className = `vid-stage ${v.platform}`;
+    $(".vid-main", el).classList.toggle("vertical", v.platform === "instagram");
+    stage.innerHTML = `<div class="vid-frame">${videoEmbed(v)}</div>`;
+    info.innerHTML = `
+      <span class="vid-proj">${p ? p.title : ""}</span>
+      <h2>${v.title}</h2>
+      <p>${v.desc}</p>
+      <div class="vid-foot">
+        <div class="vid-tags">${(v.tags || []).map((t) => `<span>${t}</span>`).join("")}</div>
+        <div class="vid-links">
+          ${p ? `<button class="vid-link" data-open="project:${p.slug}">Voir le projet</button>` : ""}
+          <a class="vid-link" href="${videoUrl(v)}" target="_blank" rel="noopener">Ouvrir sur ${PLATFORM[v.platform]} ↗</a>
+        </div>
+      </div>`;
+    info.classList.remove("in"); void info.offsetWidth; info.classList.add("in");
+  };
+  el.addEventListener("click", (e) => {
+    const b = e.target.closest(".vid-item");
+    if (b) select(b.dataset.id);
+  });
+  win._select = select;
+  select(win.dataset.pending || VIDEOS[0]?.id);
+}
+
+function openVideo(id) {
+  const w = openWindows.get("videos");
+  if (w && w._select) { w._select(id); openWindow("videos"); return; }
+  pendingVideo = id;
+  openWindow("videos");
+}
+let pendingVideo = null;
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-video]");
+  if (b) openVideo(b.dataset.video);
+});
 
 function renderSkills(el) {
   el.classList.add("slides");
@@ -719,6 +807,11 @@ function showAvailability() {
   n.querySelector(".notif-close").addEventListener("click", close);
   n.querySelectorAll("[data-open]").forEach((b) => b.addEventListener("click", close));
   requestAnimationFrame(() => requestAnimationFrame(() => n.classList.add("show")));
+  // se ferme seule après 12 s (sauf si la souris est dessus)
+  let hover = false;
+  n.addEventListener("mouseenter", () => (hover = true));
+  n.addEventListener("mouseleave", () => { hover = false; setTimeout(() => !hover && n.isConnected && close(), 4000); });
+  setTimeout(() => !hover && n.isConnected && close(), 12000);
 }
 setTimeout(showAvailability, isMobile() ? 900 : 1600);
 renderDesktopIcons();

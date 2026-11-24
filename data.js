@@ -102,6 +102,38 @@ const PROJECTS = [
   },
 ];
 
+// Vidéos (application « Vidéos ») — plateforme : "youtube" ou "instagram"
+// project : slug du projet (affiche un bouton « Voir la vidéo » dans ce projet)
+const VIDEOS = [
+  {
+    id: "aiko-curl-session",
+    project: "aiko-curly-care",
+    title: "Curl Session",
+    platform: "instagram",
+    videoId: "DYxH6BQsnhr",
+    desc: "Un concept tourné comme un moment presque « psy » : on se confie pendant qu'on se fait coiffer, tout en mettant en avant les boucles de l'influenceuse. La série a été tournée uniquement avec des influenceuses.",
+    tags: ["Création de concept"],
+  },
+  {
+    id: "chrome-clem",
+    project: "chrome",
+    title: "Collaboration avec Clem qui court",
+    platform: "instagram",
+    videoId: "DPEqRKYDFx9",
+    desc: "Collaboration avec l'influenceur Clem qui court pour Chrome — Maison de coiffure.",
+    tags: ["PR & influence"],
+  },
+  {
+    id: "samy-youtube",
+    project: "skincare-by-samy",
+    title: "Skincare by Samy",
+    platform: "youtube",
+    videoId: "LNyEn6bdsRg",
+    desc: "Une vidéo de la chaîne YouTube Skincare by Samy.",
+    tags: ["Montage vidéo"],
+  },
+];
+
 const SKILLS = [
   "Stratégie de communication & de marque",
   "Social media & community management",
