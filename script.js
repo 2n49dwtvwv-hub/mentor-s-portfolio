@@ -647,7 +647,7 @@ document.addEventListener("click", (e) => {
 });
 
 /* ---------- Direction artistique (façon Pinterest) ---------- */
-const pinImg = (path, size = "474x") => `https://i.pinimg.com/${size}/${path}`;
+const pinImg = (path, size = "474x") => (path.startsWith("assets/") ? path : `https://i.pinimg.com/${size}/${path}`);
 let pendingBoard = null;
 
 function renderMoodboard(el, win) {

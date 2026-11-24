@@ -135,7 +135,7 @@ const VIDEOS = [
 ];
 
 // Direction artistique (fenêtre façon Pinterest)
-// pins : [chemin de l'image sur i.pinimg.com, largeur, hauteur, couleur dominante]
+// pins : [image (fichier du site « assets/… » ou chemin i.pinimg.com), largeur, hauteur, couleur dominante]
 // project : slug du projet lié (affiche un bouton « Moodboard » dans ce projet)
 const MOODBOARDS = {
   profile: "https://www.pinterest.com/iammentorm/",
@@ -147,16 +147,26 @@ const MOODBOARDS = {
       url: "https://www.pinterest.com/iammentorm/kamino/",
       count: 40,
       pins: [
-        ["f7/9e/eb/f79eeb14e01f9bb99f42a336abd762ff.jpg", 474, 842, "#FFFFFF"],
-        ["3e/e6/7d/3ee67dfe263a36a5569323cd6ad6163a.jpg", 474, 474, "#F8F8F8"],
-        ["23/8d/50/238d5003a901679b7245ec7916f2344e.jpg", 474, 842, "#E5E5E5"],
-        ["33/a3/4b/33a34be288e996aac4d69df874605864.jpg", 474, 842, "#EDE7DC"],
-        ["ee/70/7b/ee707b989dfab832256d3d732670740d.jpg", 474, 474, "#393939"],
-        ["05/0a/1e/050a1e307494c2bd07aea27704da0478.jpg", 474, 434, "#FFFFFF"],
-        ["59/11/ba/5911ba3ab2b9ab0067ebfeb92c182ccf.jpg", 474, 302, "#DDBD88"],
-        ["3f/e6/71/3fe6715b8055cb132ad1797a951f0de3.jpg", 474, 355, "#FFFFFF"],
-        ["72/83/e4/7283e4453b2697d276c896d2de778de3.jpg", 474, 474, "#FFFFFF"],
-        ["75/f7/ff/75f7ff6b1234b85dd0ed7bfb93cce18e.jpg", 474, 842, "#FFFFFF"],
+        ["assets/moodboard/kamiiinoo-01.webp", 424, 770, "#E1DACA"],
+        ["assets/moodboard/kamiiinoo-02.webp", 423, 771, "#9D9998"],
+        ["assets/moodboard/kamiiinoo-03.webp", 423, 423, "#525C61"],
+        ["assets/moodboard/kamiiinoo-04.webp", 424, 770, "#BAB6B2"],
+        ["assets/moodboard/kamiiinoo-05.webp", 423, 768, "#D7AEB6"],
+        ["assets/moodboard/kamiiinoo-06.webp", 424, 732, "#E4D2C9"],
+        ["assets/moodboard/kamiiinoo-07.webp", 423, 424, "#B1CBE0"],
+        ["assets/moodboard/kamiiinoo-08.webp", 424, 423, "#EBE7E3"],
+        ["assets/moodboard/kamiiinoo-09.webp", 423, 602, "#CACAC7"],
+        ["assets/moodboard/kamiiinoo-10.webp", 424, 770, "#EEEEED"],
+        ["assets/moodboard/kamiiinoo-11.webp", 423, 771, "#BAB6B2"],
+        ["assets/moodboard/kamiiinoo-12.webp", 424, 804, "#C6B8B5"],
+        ["assets/moodboard/kamiiinoo-13.webp", 423, 770, "#DBCDD1"],
+        ["assets/moodboard/kamiiinoo-14.webp", 424, 623, "#C9A9AD"],
+        ["assets/moodboard/kamiiinoo-15.webp", 423, 646, "#C8C2B9"],
+        ["assets/moodboard/kamiiinoo-16.webp", 424, 320, "#E3D8D9"],
+        ["assets/moodboard/kamiiinoo-17.webp", 423, 725, "#EDE9E7"],
+        ["assets/moodboard/kamiiinoo-18.webp", 424, 422, "#EADFDF"],
+        ["assets/moodboard/kamiiinoo-19.webp", 423, 424, "#E7E7E7"],
+        ["assets/moodboard/kamiiinoo-20.webp", 424, 423, "#EDEEEF"],
       ],
     },
     {
