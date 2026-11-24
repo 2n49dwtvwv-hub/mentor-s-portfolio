@@ -565,9 +565,12 @@ function renderProject(el, p) {
           <h2 data-a="up" style="--d:900ms">${p.title}</h2>
           <div class="proj-links">${linkButtons(p)}</div>
         </div>
-        <ul class="proj-roles">${p.roles.map((r, k) => `<li data-a="up" style="--d:${1000 + k * 70}ms">${r}</li>`).join("")}</ul>
-        ${p.highlights?.length ? `<ul class="proj-highlights">${p.highlights.map((h, k) =>
-          `<li data-a="up" style="--d:${1200 + k * 90}ms">${h}</li>`).join("")}</ul>` : ""}
+        ${p.stats?.length ? `<div class="proj-stats">${p.stats.map(([v, l], k) =>
+          `<div class="stat" data-a="up" style="--d:${1000 + k * 90}ms"><strong>${v}</strong><span>${l}</span></div>`).join("")}</div>` : ""}
+        ${p.story ? `<div class="proj-story">${[["demande", "La demande"], ["actions", "Ce que j'ai fait"], ["resultat", "Le résultat"]]
+          .filter(([k]) => p.story[k]).map(([k, t], i) =>
+          `<div class="story-block" data-a="up" style="--d:${1150 + i * 110}ms"><span class="story-n">0${i + 1}</span><h3>${t}</h3><p>${p.story[k]}</p></div>`).join("")}</div>` : ""}
+        <ul class="proj-roles">${p.roles.map((r, k) => `<li data-a="up" style="--d:${1400 + k * 60}ms">${r}</li>`).join("")}</ul>
         <button class="proj-next" data-open="project:${next.slug}" data-a="up" style="--d:1500ms">Projet suivant : ${next.title} →</button>
       </div>
     </section>`;
@@ -593,6 +596,7 @@ function renderFinder(el) {
         ${Object.entries(sections).map(([k, v]) => `<button class="side-link" data-sec="${k}">${GLYPHS[v.glyph].replace(/fill="#fff"/g, 'fill="#0a84ff"')}${v.label}</button>`).join("")}
         <p class="side-h">Liens</p>
         <a class="side-link" href="${PROFILE.instagram.url}" target="_blank" rel="noopener">${LINK_ICONS.instagram}Instagram</a>
+        <a class="side-link" href="${PROFILE.linkedin}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#0a84ff"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4v11H3zM9.5 9.5h3.8v1.6c.6-1 1.9-1.9 3.8-1.9 4 0 4.4 2.6 4.4 5.9v5.4h-4v-4.8c0-1.2 0-2.7-1.7-2.7s-2 1.3-2 2.6v4.9h-4z"/></svg>LinkedIn</a>
         <a class="side-link" href="mailto:${PROFILE.email}">${GLYPHS.mail.replace('stroke="#fff"', 'stroke="#0a84ff"')}E-mail</a>
       </aside>
       <div class="finder-body"><div class="finder-main fi-main"></div><div class="finder-status"></div></div>
@@ -842,6 +846,7 @@ function renderContact(el) {
     <section class="page contact-page">
       <div class="contact-top">
         <a href="tel:${PROFILE.phone.replace(/\s/g, "")}" data-a="up" style="--d:900ms">${PROFILE.phone}</a>
+        ${PROFILE.linkedin ? `<a href="${PROFILE.linkedin}" target="_blank" rel="noopener" data-a="up" style="--d:950ms">LinkedIn</a>` : ""}
         ${ig ? `<a href="${ig.url}" target="_blank" rel="noopener" data-a="up" style="--d:1000ms">${ig.handle}</a>` : ""}
       </div>
       <div class="contact-stage">
@@ -953,6 +958,36 @@ function tick() { $("#clock").textContent = clockFmt.format(new Date()).replace(
 
 /* ---------- Démarrage ---------- */
 document.title = `${PROFILE.fullName || PROFILE.name} — Portfolio`;
+
+/* ---------- Menu Aide ---------- */
+function toggleHelp(btn) {
+  const old = document.querySelector(".menu-pop");
+  if (old) { old.remove(); return; }
+  const pop = document.createElement("div");
+  pop.className = "menu-pop";
+  pop.innerHTML = `
+    <p class="mp-title">Comment naviguer</p>
+    <ul>
+      <li><span>🖱️</span>Clique sur un fichier du bureau ou une icône du Dock pour l'ouvrir.</li>
+      <li><span>🔍</span>Le <strong>Finder</strong> (premier du Dock) donne accès à tout le portfolio.</li>
+      <li><span>🪟</span>Déplace les fenêtres par leur barre de titre, double-clique pour agrandir.</li>
+      <li><span>🔴</span>Les boutons rouge / jaune / vert ferment, réduisent et agrandissent.</li>
+      <li><span>🎬</span>Dans les projets, les captures et les boutons sont cliquables.</li>
+    </ul>
+    <div class="mp-sep"></div>
+    <button data-open="finder">Ouvrir le Finder</button>
+    <button data-open="contact">Me contacter</button>
+    <button data-open="cv">Voir mon CV</button>`;
+  document.body.appendChild(pop);
+  const r = btn.getBoundingClientRect();
+  pop.style.left = Math.min(r.left - 8, window.innerWidth - pop.offsetWidth - 8) + "px";
+  pop.addEventListener("click", (e) => { if (e.target.closest("button")) pop.remove(); });
+}
+document.addEventListener("click", (e) => {
+  const h = e.target.closest("#menu-help");
+  if (h) return toggleHelp(h);
+  if (!e.target.closest(".menu-pop")) document.querySelector(".menu-pop")?.remove();
+});
 
 /* ---------- Notification « recherche de stage » ---------- */
 function showAvailability() {

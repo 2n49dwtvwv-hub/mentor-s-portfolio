@@ -26,7 +26,9 @@ const PROFILE = {
   email: "m.mentor@outlook.fr",
   phone: "+33 7 68 75 52 18",
   instagram: { handle: "@iammentorm", url: "https://www.instagram.com/iammentorm/" },
+  linkedin: "https://www.linkedin.com/in/mentor-mustafa-07564226a/",
   links: [
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/mentor-mustafa-07564226a/" },
     { label: "Instagram", url: "https://www.instagram.com/iammentorm/" },
   ],
   cv: "assets/cv.pdf",              // le PDF à télécharger
@@ -48,9 +50,15 @@ const PROJECTS = [
     title: "Skincare by Samy",
     thumb: "assets/projets/p2-thumb.webp",
     roles: ["Montage vidéo", "Création de la chaîne YouTube", "Création de concept", "PR & influence"],
-    highlights: [
-      "+1 million d'abonnés sur TikTok, Instagram et YouTube",
-      "Collaborations avec L'Oréal, Avène et La Roche-Posay",
+    story: {
+      demande: "Créer une chaîne YouTube de A à Z, avec un style de montage personnalisé et reconnaissable : une identité visuelle propre à Samy.",
+      actions: "Concepts des vidéos, montage et direction artistique du montage.",
+      resultat: "Plus de 300 000 abonnés gagnés, des vidéos entre 300 000 et 600 000 vues, et de grandes collaborations avec L'Oréal, La Roche-Posay et Avène.",
+    },
+    stats: [
+      ["+300K", "abonnés gagnés"],
+      ["300–600K", "vues par vidéo"],
+      ["L'Oréal · LRP · Avène", "collaborations"],
     ],
     links: { youtube: "https://www.youtube.com/@skincarebysamy", instagram: "https://www.instagram.com/skincarebysamy/" },
   },
@@ -60,7 +68,15 @@ const PROJECTS = [
     title: "Kamiiinoo",
     thumb: "assets/projets/p3-thumb.webp",
     roles: ["Montage vidéo", "Direction artistique", "Création de concept", "Création de la chaîne YouTube"],
-    highlights: ["+100K abonnés sur TikTok, Instagram et YouTube"],
+    story: {
+      demande: "Lancer la chaîne YouTube et construire une identité forte autour de la créatrice : un vrai travail de personal branding.",
+      actions: "Direction artistique, montage et stratégie de construction d'identité et de personal branding.",
+      resultat: "Une chaîne lancée avec des vidéos entre 2 000 et 300 000 vues, et plus de 100 000 abonnés sur TikTok, Instagram et YouTube.",
+    },
+    stats: [
+      ["+100K", "abonnés au total"],
+      ["jusqu'à 300K", "vues par vidéo"],
+    ],
     links: { youtube: "https://www.youtube.com/@kamiiinoo", instagram: "https://www.instagram.com/kamii.bk_/" },
   },
   {
@@ -69,7 +85,14 @@ const PROJECTS = [
     title: "Sunae Curls",
     thumb: "assets/projets/p4-thumb.webp",
     roles: ["Montage vidéo", "Direction artistique"],
-    highlights: [],
+    story: {
+      demande: "Donner au salon une image reconnaissable au premier coup d'œil sur les réseaux.",
+      actions: "Direction artistique et surtout le montage : un style unique, propre au salon, qui permet de le reconnaître immédiatement.",
+      resultat: "Une identité vidéo cohérente et immédiatement identifiable, avec des contenus qui performent comme ceux d'Aiko.",
+    },
+    stats: [
+      ["100 %", "reconnaissable"],
+    ],
     links: { instagram: "https://www.instagram.com/sunaecurls/" },
   },
   {
@@ -78,10 +101,14 @@ const PROJECTS = [
     title: "Aiko Curly Care",
     thumb: "assets/projets/p5-thumb.webp",
     roles: ["Direction artistique", "Création de concept", "Montage vidéo"],
-    highlights: [
-      "Freelance, de janvier 2023 à octobre 2025",
-      "Stratégie social media et community management",
-      "Communautés développées de 20 000 à 25 000 abonnés",
+    story: {
+      demande: "Construire une identité visuelle et vidéo forte pour un salon spécialiste des cheveux bouclés à Bruxelles.",
+      actions: "Direction artistique, concepts (dont la série « Curl Session » avec des influenceuses) et montage, avec un style unique propre au salon.",
+      resultat: "Plus de 30 000 abonnés et des vidéos qui font régulièrement entre 30 000 et 1 million de vues.",
+    },
+    stats: [
+      ["+30K", "abonnés"],
+      ["jusqu'à 1M", "vues par vidéo"],
     ],
     links: { site: "https://www.aikocurlycare.com/", instagram: "https://www.instagram.com/aikocurlycare/" },
   },
@@ -92,11 +119,15 @@ const PROJECTS = [
     thumb: "assets/projets/chrome-thumb.webp",
     subtitle: "Maison de coiffure — Assistant communication · Stage de 6 mois · Courchevel",
     roles: ["Création de concept", "PR & influence", "Montage vidéo", "Direction artistique"],
-    highlights: [
-      "Direction artistique et lancement de produits",
-      "Création de contenus et gestion des réseaux sociaux",
-      "Organisation d'événements et collaborations avec des influenceurs",
-      "Calendrier de l'Avent : 600 000 vues et plusieurs milliers d'abonnés",
+    story: {
+      demande: "Refaire toute la direction artistique du compte et repartir de zéro : lancer une vraie identité de marque et une identité visuelle pour le salon, afin de gagner des abonnés et une place dans la coiffure de luxe.",
+      actions: "Concepts, tournages, montages, choix des influenceurs, direction artistique, stratégie de communication et stratégie de marque : construire une marque dans l'univers du luxe.",
+      resultat: "Un calendrier de l'Avent à plus de 600 000 vues, plus de 2 000 abonnés, et des dizaines de milliers de vues à chaque nouvelle vidéo.",
+    },
+    stats: [
+      ["600K+", "vues · calendrier de l'Avent"],
+      ["+2 000", "abonnés"],
+      ["10K+", "vues par vidéo"],
     ],
     links: { instagram: "https://www.instagram.com/chrome_maisondecoiffure/" },
   },
@@ -129,8 +160,8 @@ const VIDEOS = [
     title: "Skincare by Samy",
     platform: "youtube",
     videoId: "LNyEn6bdsRg",
-    desc: "Une vidéo de la chaîne YouTube Skincare by Samy.",
-    tags: ["Montage vidéo"],
+    desc: "Une vidéo de la chaîne YouTube que nous avons créée de A à Z : concept, montage et direction artistique du montage, avec un style reconnaissable propre à Samy.",
+    tags: ["Création de concept", "Montage vidéo", "Direction artistique"],
   },
 ];
 
