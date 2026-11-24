@@ -93,7 +93,6 @@ const DOCK_ITEMS = [
   { id: "moodboard", label: "Direction artistique", glyph: "pinterest", bg: "#fff" },
   "sep",
   { id: "cv",       label: "CV",          glyph: "preview",  bg: "transparent", plain: true },
-  { id: "terminal", label: "Terminal",    glyph: "terminal", bg: "linear-gradient(160deg,#4a4a4f,#1c1c1e)" },
   "sep",
   { skill: "finalcut", label: "Final Cut Pro",        glyph: "finalcut", bg: "transparent", plain: true },
   { skill: "adobe",    label: "Adobe Creative Cloud", glyph: "adobe",    bg: "radial-gradient(circle at 12% 100%,#2f8cff 0,transparent 48%),radial-gradient(circle at 95% 100%,#4ddc48 0,transparent 45%),radial-gradient(circle at 92% 70%,#ffd51c 0,transparent 42%),radial-gradient(circle at 0% 45%,#e637e6 0,transparent 50%),radial-gradient(circle at 10% 10%,#ff1790 0,transparent 45%),linear-gradient(160deg,#ff0a1a,#ff6a00)" },
