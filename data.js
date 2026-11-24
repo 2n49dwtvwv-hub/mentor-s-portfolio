@@ -5,6 +5,12 @@
 
 const PROFILE = {
   name: "Mentor",
+  fullName: "Mentor Mustafa",
+  // Annonce affichée en notification à l'arrivée sur le site (mettre null pour la retirer)
+  availability: {
+    title: "Je recherche un stage",
+    text: "En stratégie de marque, communication et création de contenus visuels et digitaux, à partir du 25 janvier 2027.",
+  },
   username: "mentor",               // utilisé dans le Terminal
   role: "Communication & stratégie de marque",
   location: "",
@@ -112,6 +118,15 @@ const SOFTWARE = [
   { id: "adobe",    name: "Adobe Creative Cloud", level: 3, desc: "Photoshop, Illustrator et After Effects pour la direction artistique et la création de visuels.", tags: ["Photoshop", "Illustrator", "After Effects"] },
   { id: "capcut",   name: "CapCut",               level: 3, desc: "Montage rapide de formats courts pour TikTok, Instagram Reels et YouTube Shorts.", tags: ["TikTok", "Reels", "Shorts"] },
   { id: "notion",   name: "Notion",               level: 2, desc: "Organisation des projets et des calendriers de contenus.", tags: ["Organisation", "Calendrier éditorial"] },
+];
+
+const CERTIFICATIONS = ["Inside LVMH", "Editing 360"];
+
+const LANGUAGES = [
+  { name: "Français", level: "Langue maternelle" },
+  { name: "Albanais", level: "Langue maternelle" },
+  { name: "Anglais",  level: "C1+" },
+  { name: "Allemand", level: "B2+" },
 ];
 
 const TOOLS = [

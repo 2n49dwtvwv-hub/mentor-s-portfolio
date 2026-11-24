@@ -173,6 +173,38 @@ a { color: var(--blue); text-decoration: none; }
 .dock-item.active::before { opacity: 0 !important; }
 .dock-item.active .app { filter: brightness(.85); }
 
+/* ---------- Notification façon macOS ---------- */
+.notif {
+  position: fixed; top: calc(var(--menubar) + 10px); right: 12px; z-index: 9800;
+  width: 360px; max-width: calc(100vw - 24px);
+  display: flex; gap: 12px; padding: 14px 16px; border-radius: 18px;
+  font-family: var(--font); color: var(--text);
+  background: rgba(246, 246, 248, .82);
+  backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, .6);
+  box-shadow: 0 0 0 .5px rgba(0, 0, 0, .1), 0 14px 40px rgba(0, 0, 0, .22);
+  transform: translateX(calc(100% + 30px)); opacity: 0;
+  transition: transform .7s cubic-bezier(.34, 1.3, .64, 1), opacity .4s;
+}
+.notif.show { transform: none; opacity: 1; }
+.notif-avatar { flex: none; width: 42px; height: 42px; border-radius: 10px; object-fit: cover; object-position: 45% 20%; }
+.notif-body { flex: 1; min-width: 0; }
+.notif-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.notif-top strong { font-size: 14px; }
+.notif-top span { font-size: 11px; color: var(--muted); }
+.notif-body p { margin-top: 3px; font-size: 13px; line-height: 1.4; color: #3a3a3c; }
+.notif-actions { display: flex; gap: 8px; margin-top: 10px; }
+.notif-btn { border: 0; border-radius: 8px; padding: 6px 12px; font-size: 12px; font-weight: 600; background: rgba(0, 0, 0, .07); cursor: pointer; }
+.notif-btn.primary { background: var(--blue); color: #fff; }
+.notif-btn:hover { filter: brightness(.95); }
+.notif-close {
+  position: absolute; top: -7px; left: -7px; width: 20px; height: 20px; border-radius: 50%;
+  border: 0; background: rgba(240, 240, 244, .95); box-shadow: 0 1px 4px rgba(0, 0, 0, .25);
+  font-size: 13px; line-height: 20px; color: #555; cursor: pointer; opacity: 0; transition: opacity .2s;
+}
+.notif:hover .notif-close { opacity: 1; }
+@media (hover: none) { .notif-close { opacity: 1; } }
+
 /* ---------- Bulle « compétence » des logiciels ---------- */
 .skill-pop {
   position: fixed; z-index: 9500; width: 300px; max-width: calc(100vw - 20px);
@@ -630,6 +662,21 @@ iframe.cv { width: 100%; height: 100%; border: 0; display: block; }
 }
 .content.slides .file .label { font-family: "Poppins", var(--font); font-weight: 600; color: var(--brown); }
 
+/* --- Certifications & langues --- */
+.extras { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 100%; max-width: 760px; margin-top: 34px; }
+.extra-card {
+  padding: 18px 20px; border-radius: 14px;
+  background: rgba(255, 255, 255, .55); border: 1.5px solid rgba(69, 41, 27, .15);
+  transition: opacity .9s var(--ease) var(--d, 0ms), transform 1.2s var(--ease) var(--d, 0ms), filter 1s var(--ease) var(--d, 0ms), scale .3s var(--spring), box-shadow .3s;
+}
+.extra-card:hover { scale: 1.02; box-shadow: 0 10px 24px rgba(69, 41, 27, .12); }
+.extra-card h3 { font-size: 13px; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: .02em; margin-bottom: 10px; }
+.extra-card ul { list-style: none; display: grid; gap: 8px; }
+.extra-card li { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14px; }
+.extra-card li span { font-size: 12px; opacity: .7; }
+.extra-card .medal { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 10px; border-radius: 50%; background: #f2d65c; color: var(--brown); font-size: 12px; opacity: 1; }
+.extra-card li:has(.medal) { justify-content: flex-start; font-weight: 700; }
+
 /* --- Fenêtre étroite (mobile ou fenêtre réduite) --- */
 @container (max-width: 640px) {
   .about-grid { grid-template-columns: 1fr; }
@@ -643,6 +690,7 @@ iframe.cv { width: 100%; height: 100%; border: 0; display: block; }
   .step { padding-top: 0; }
   .step-dot { left: -26px; }
   .skill-list { grid-template-columns: 1fr; gap: 14px; }
+  .extras { grid-template-columns: 1fr; }
   .contact-top { flex-direction: column; gap: 6px; align-items: center; }
   .contact-stage { display: flex; flex-direction: column; }
   .t-ensemble { position: static; order: -1; width: 58%; margin: 0 auto 18px; }

@@ -563,6 +563,16 @@ function renderSkills(el) {
       <div class="tools">
         ${TOOLS.map((t, i) => `<span class="tool t${i}" data-a="pop" style="--d:${1500 + i * 140}ms;--r:${[-9, 3, 10][i] ?? 0}deg" data-depth="${[10, 6, 12][i] ?? 8}" title="${t.name}"><img src="${t.img}" alt="${t.name}"></span>`).join("")}
       </div>
+      <div class="extras">
+        <div class="extra-card" data-a="up" style="--d:1900ms">
+          <h3>Certifications</h3>
+          <ul>${CERTIFICATIONS.map((c) => `<li><span class="medal">★</span>${c}</li>`).join("")}</ul>
+        </div>
+        <div class="extra-card" data-a="up" style="--d:2050ms">
+          <h3>Langues</h3>
+          <ul>${LANGUAGES.map((l) => `<li><strong>${l.name}</strong><span>${l.level}</span></li>`).join("")}</ul>
+        </div>
+      </div>
     </section>`;
   setupAnims(el);
 }
@@ -684,7 +694,33 @@ const clockFmt = new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "nume
 function tick() { $("#clock").textContent = clockFmt.format(new Date()).replace(",", ""); }
 
 /* ---------- Démarrage ---------- */
-document.title = `${PROFILE.name} — Portfolio`;
+document.title = `${PROFILE.fullName || PROFILE.name} — Portfolio`;
+
+/* ---------- Notification « recherche de stage » ---------- */
+function showAvailability() {
+  const a = PROFILE.availability;
+  if (!a) return;
+  const n = document.createElement("div");
+  n.className = "notif";
+  n.setAttribute("role", "status");
+  n.innerHTML = `
+    <img class="notif-avatar" src="${PROFILE.avatar}" alt="">
+    <div class="notif-body">
+      <div class="notif-top"><strong>${a.title}</strong><span>maintenant</span></div>
+      <p>${a.text}</p>
+      <div class="notif-actions">
+        <button class="notif-btn primary" data-open="contact">Me contacter</button>
+        <button class="notif-btn" data-open="cv">Voir le CV</button>
+      </div>
+    </div>
+    <button class="notif-close" aria-label="Fermer">×</button>`;
+  document.body.appendChild(n);
+  const close = () => { n.classList.remove("show"); setTimeout(() => n.remove(), 500); };
+  n.querySelector(".notif-close").addEventListener("click", close);
+  n.querySelectorAll("[data-open]").forEach((b) => b.addEventListener("click", close));
+  requestAnimationFrame(() => requestAnimationFrame(() => n.classList.add("show")));
+}
+setTimeout(showAvailability, isMobile() ? 900 : 1600);
 renderDesktopIcons();
 renderDock();
 tick();
