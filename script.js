@@ -3,6 +3,25 @@
    Le contenu se modifie dans data.js.
    ========================================================= */
 
+/* ---------- Langue (FR / EN) ---------- */
+let LANG = (() => { try { return localStorage.getItem("lang"); } catch { return null; } })() || "fr";
+const L = (fr, en) => (LANG === "en" ? en : fr);
+const DATA_FR = structuredClone({ PROFILE, PARCOURS, PROJECTS, VIDEOS, MOODBOARDS, SKILLS, SOFTWARE, LANGUAGES });
+function applyData() {
+  const src = structuredClone(DATA_FR);
+  const en = LANG === "en" && typeof DATA_EN !== "undefined" ? DATA_EN : null;
+  Object.assign(PROFILE, src.PROFILE, en ? en.PROFILE : {});
+  PARCOURS.splice(0, PARCOURS.length, ...(en ? en.PARCOURS : src.PARCOURS));
+  PROJECTS.forEach((p, i) => Object.assign(p, src.PROJECTS[i], en?.PROJECTS[p.slug] || {}));
+  VIDEOS.forEach((v, i) => Object.assign(v, src.VIDEOS[i], en?.VIDEOS[v.id] || {}));
+  MOODBOARDS.boards.forEach((b, i) => (b.name = en?.MOODBOARDS[b.id] || src.MOODBOARDS.boards[i].name));
+  SKILLS.splice(0, SKILLS.length, ...(en ? en.SKILLS : src.SKILLS));
+  SOFTWARE.forEach((x, i) => Object.assign(x, src.SOFTWARE[i], en?.SOFTWARE[x.id] || {}));
+  LANGUAGES.splice(0, LANGUAGES.length, ...(en ? en.LANGUAGES : src.LANGUAGES));
+  document.documentElement.lang = LANG;
+}
+applyData();
+
 const $ = (sel, el = document) => el.querySelector(sel);
 const desktop = $("#desktop");
 const winLayer = $("#windows");
@@ -56,17 +75,17 @@ const GLYPHS = {
 
 /* ---------- Applications / fenêtres ---------- */
 const APPS = {
-  about:    { title: "À propos.txt",    icon: "doc",     w: 940, h: 640, render: renderAbout },
+  about:    { get title() { return L("À propos.txt", "About.txt"); },    icon: "doc",     w: 940, h: 640, render: renderAbout },
   finder:   { title: "Finder",          icon: null,      w: 920, h: 640, render: renderFinder },
-  projects: { title: "Projets",         icon: "folder",  w: 900, h: 720, render: renderProjects },
-  skills:   { title: "Compétences.txt", icon: "doc",     w: 860, h: 600, render: renderSkills },
+  projects: { get title() { return L("Projets", "Projects"); },         icon: "folder",  w: 900, h: 720, render: renderProjects },
+  skills:   { get title() { return L("Compétences.txt", "Skills.txt"); }, icon: "doc",     w: 860, h: 600, render: renderSkills },
   contact:  { title: "Contact.vcf",     icon: "contact", w: 880, h: 580, render: renderContact },
-  videos:   { title: "Vidéos",          icon: "movie",   w: 1040, h: 720, render: renderVideos, dark: true },
-  moodboard:{ title: "Direction artistique", icon: "pinterest", w: 1060, h: 780, render: renderMoodboard },
+  videos:   { get title() { return L("Vidéos", "Videos"); },          icon: "movie",   w: 1040, h: 720, render: renderVideos, dark: true },
+  moodboard:{ get title() { return L("Direction artistique", "Art direction"); }, icon: "pinterest", w: 1060, h: 780, render: renderMoodboard },
   cv:       { title: "CV.pdf",          icon: "pdf",     w: 640, h: 860, render: renderCV },
   terminal: { title: `${PROFILE.username} — zsh`, icon: null, w: 600, h: 380, render: renderTerminal, dark: true },
-  trash:    { title: "Corbeille", icon: null, w: 460, h: 300, render: (el) => {
-    el.innerHTML = `<div class="empty"><div>${GLYPHS.trash}<p>La corbeille est vide.</p></div></div>`;
+  trash:    { get title() { return L("Corbeille", "Trash"); }, icon: null, w: 460, h: 300, render: (el) => {
+    el.innerHTML = `<div class="empty"><div>${GLYPHS.trash}<p>${L("La corbeille est vide.", "The trash is empty.")}</p></div></div>`;
   } },
 };
 
@@ -85,12 +104,12 @@ const DESKTOP_ITEMS = ["about", "projects", "skills", "moodboard", "videos", "co
 /* Icônes du dock */
 const DOCK_ITEMS = [
   { id: "finder",   label: "Finder",      glyph: "finder",   bg: "transparent", plain: true },
-  { id: "projects", label: "Projets",     glyph: "folder",   bg: "linear-gradient(160deg,#5ac8fa,#0a6cff)" },
-  { id: "about",    label: "À propos",    glyph: "contacts", bg: "transparent", plain: true },
-  { id: "skills",   label: "Compétences", glyph: "notes",    bg: "transparent", plain: true },
+  { id: "projects", get label() { return L("Projets", "Projects"); },     glyph: "folder",   bg: "linear-gradient(160deg,#5ac8fa,#0a6cff)" },
+  { id: "about",    get label() { return L("À propos", "About"); },    glyph: "contacts", bg: "transparent", plain: true },
+  { id: "skills",   get label() { return L("Compétences", "Skills"); }, glyph: "notes",    bg: "transparent", plain: true },
   { id: "contact",  label: "Contact",     glyph: "mailapp",  bg: "transparent", plain: true },
-  { id: "videos",   label: "Vidéos",      glyph: "quicktime", bg: "transparent", plain: true },
-  { id: "moodboard", label: "Direction artistique", glyph: "pinterest", bg: "#fff" },
+  { id: "videos",   get label() { return L("Vidéos", "Videos"); },      glyph: "quicktime", bg: "transparent", plain: true },
+  { id: "moodboard", get label() { return L("Direction artistique", "Art direction"); }, glyph: "pinterest", bg: "#fff" },
   "sep",
   { id: "cv",       label: "CV",          glyph: "preview",  bg: "transparent", plain: true },
   "sep",
@@ -99,7 +118,7 @@ const DOCK_ITEMS = [
   { skill: "capcut",   label: "CapCut",               glyph: "capcut",   bg: "#fff" },
   { skill: "notion",   label: "Notion",               glyph: "notion",   bg: "#fff" },
   "sep",
-  { id: "trash",    label: "Corbeille",   glyph: "trash",    bg: "transparent", plain: true },
+  { id: "trash",    get label() { return L("Corbeille", "Trash"); },   glyph: "trash",    bg: "transparent", plain: true },
 ];
 
 /* ---------- Gestion des fenêtres ---------- */
@@ -125,9 +144,9 @@ function openWindow(id) {
   win.innerHTML = `
     <div class="titlebar">
       <div class="lights">
-        <button class="light close" aria-label="Fermer"></button>
-        <button class="light min" aria-label="Réduire"></button>
-        <button class="light max" aria-label="Agrandir"></button>
+        <button class="light close" aria-label="${L("Fermer", "Close")}"></button>
+        <button class="light min" aria-label="${L("Réduire", "Minimise")}"></button>
+        <button class="light max" aria-label="${L("Agrandir", "Maximise")}"></button>
       </div>
       <div class="title">${app.title}</div>
     </div>
@@ -296,11 +315,11 @@ function toggleSkillPop(item) {
   pop.innerHTML = `
     <div class="sp-head">
       <span class="sp-icon ${dockItem.plain ? "plain" : ""} ${sw.id}" style="background:${dockItem.bg};${dockItem.plain ? "box-shadow:none" : ""}">${GLYPHS[dockItem.glyph]}</span>
-      <div><strong>${sw.name}</strong><span class="sp-badge">✓ Je maîtrise</span></div>
+      <div><strong>${sw.name}</strong><span class="sp-badge">${L("✓ Je maîtrise", "✓ Mastered")}</span></div>
     </div>
-    <div class="sp-level"><span>Niveau</span>
+    <div class="sp-level"><span>${L("Niveau", "Level")}</span>
       <span class="sp-bars">${[1, 2, 3].map((n) => `<i class="${n <= sw.level ? "on" : ""}" style="--n:${n}"></i>`).join("")}</span>
-      <em>${["", "Notions", "Bon niveau", "Expert"][sw.level]}</em>
+      <em>${(LANG === "en" ? ["", "Basics", "Proficient", "Expert"] : ["", "Notions", "Bon niveau", "Expert"])[sw.level]}</em>
     </div>
     <p>${sw.desc}</p>
     <div class="sp-tags">${sw.tags.map((t, i) => `<span style="--n:${i}">${t}</span>`).join("")}</div>
@@ -436,7 +455,7 @@ function renderAbout(el) {
           </div>
         </div>
       </div>
-      <div class="scroll-hint" data-a="up" style="--d:2200ms">Mon parcours ↓</div>
+      <div class="scroll-hint" data-a="up" style="--d:2200ms">${L("Mon parcours ↓", "My background ↓")}</div>
     </section>
 
     <section class="page parcours-page">
@@ -461,7 +480,7 @@ function renderAbout(el) {
 }
 
 /* ---------- Projets ---------- */
-const LINK_LABELS = { youtube: "YouTube", instagram: "Instagram", site: "Site web" };
+const LINK_LABELS = { youtube: "YouTube", instagram: "Instagram", get site() { return L("Site web", "Website"); } };
 const LINK_ICONS = {
   youtube: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>`,
   instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>`,
@@ -477,7 +496,7 @@ function slideHTML(key, project) {
     const tag = href ? "a" : "div";
     const kind = href ? "link" : g.kind === "link" ? "sticker" : g.kind;
     const attrs = href
-      ? `href="${href}" target="_blank" rel="noopener" aria-label="${project.title} sur ${LINK_LABELS[g.link]}"`
+      ? `href="${href}" target="_blank" rel="noopener" aria-label="${project.title} ${L("sur", "on")} ${LINK_LABELS[g.link]}"`
       : g.kind === "deco" ? `aria-hidden="true"` : "";
     const [x, y, w, h] = g.box;
     return `<${tag} class="pel ${kind}" ${attrs} data-a="${g.anim}"
@@ -501,7 +520,7 @@ function itemHTML(it) {
 function linkButtons(p, cls = "") {
   const vids = (typeof VIDEOS !== "undefined" ? VIDEOS : []).filter((v) => v.project === p.slug);
   const vbtn = vids.length
-    ? `<button class="proj-btn video" data-video="${vids[0].id}" data-a="up" style="--d:1250ms">${GLYPHS.play}<span>Voir la vidéo</span></button>`
+    ? `<button class="proj-btn video" data-video="${vids[0].id}" data-a="up" style="--d:1250ms">${GLYPHS.play}<span>${L("Voir la vidéo", "Watch the video")}</span></button>`
     : "";
   const board = (typeof MOODBOARDS !== "undefined" ? MOODBOARDS.boards : []).find((b) => b.project === p.slug);
   const mbtn = board
@@ -517,10 +536,10 @@ function renderProjects(el) {
   el.innerHTML = `
     <div class="finder">
       <aside>
-        <p class="side-h">Favoris</p>
-        <button class="side-link active">${GLYPHS.folder.replace('fill="#fff"', 'fill="#0a84ff"')}Projets</button>
-        <button class="side-link" data-open="about">${GLYPHS.user.replace('fill="#fff"', 'fill="#0a84ff"')}À propos</button>
-        <button class="side-link" data-open="skills">${GLYPHS.star.replace('fill="#fff"', 'fill="#0a84ff"')}Compétences</button>
+        <p class="side-h">${L("Favoris", "Favourites")}</p>
+        <button class="side-link active">${GLYPHS.folder.replace('fill="#fff"', 'fill="#0a84ff"')}${L("Projets", "Projects")}</button>
+        <button class="side-link" data-open="about">${GLYPHS.user.replace('fill="#fff"', 'fill="#0a84ff"')}${L("À propos", "About")}</button>
+        <button class="side-link" data-open="skills">${GLYPHS.star.replace('fill="#fff"', 'fill="#0a84ff"')}${L("Compétences", "Skills")}</button>
         <button class="side-link" data-open="contact">${GLYPHS.mail.replace('stroke="#fff"', 'stroke="#0a84ff"')}Contact</button>
       </aside>
       <div class="finder-body">
@@ -536,7 +555,7 @@ function renderProjects(el) {
             </button>`).join("")}
           </div>
         </div>
-        <div class="finder-status">${PROJECTS.length} éléments</div>
+        <div class="finder-status">${PROJECTS.length} ${L("éléments", "items")}</div>
       </div>
     </div>`;
   setupAnims($(".finder-main", el));
@@ -567,11 +586,11 @@ function renderProject(el, p) {
         </div>
         ${p.stats?.length ? `<div class="proj-stats">${p.stats.map(([v, l], k) =>
           `<div class="stat" data-a="up" style="--d:${1000 + k * 90}ms"><strong>${v}</strong><span>${l}</span></div>`).join("")}</div>` : ""}
-        ${p.story ? `<div class="proj-story">${[["demande", "La demande"], ["actions", "Ce que j'ai fait"], ["resultat", "Le résultat"]]
+        ${p.story ? `<div class="proj-story">${[["demande", L("La demande", "The brief")], ["actions", L("Ce que j'ai fait", "What I did")], ["resultat", L("Le résultat", "The result")]]
           .filter(([k]) => p.story[k]).map(([k, t], i) =>
           `<div class="story-block" data-a="up" style="--d:${1150 + i * 110}ms"><span class="story-n">0${i + 1}</span><h3>${t}</h3><p>${p.story[k]}</p></div>`).join("")}</div>` : ""}
         <ul class="proj-roles">${p.roles.map((r, k) => `<li data-a="up" style="--d:${1400 + k * 60}ms">${r}</li>`).join("")}</ul>
-        <button class="proj-next" data-open="project:${next.slug}" data-a="up" style="--d:1500ms">Projet suivant : ${next.title} →</button>
+        <button class="proj-next" data-open="project:${next.slug}" data-a="up" style="--d:1500ms">${L("Projet suivant :", "Next project:")} ${next.title} →</button>
       </div>
     </section>`;
   setupAnims(el);
@@ -584,17 +603,17 @@ function renderFinder(el) {
     return `<button class="fi-file" data-open="${id}"><span class="fi-icon">${ICONS[app.icon]}</span><span class="fi-name">${app.title}</span></button>`;
   };
   const sections = {
-    all: { label: "Tout", glyph: "star" },
+    all: { get label() { return L("Tout", "All"); }, glyph: "star" },
     docs: { label: "Documents", glyph: "user" },
-    projects: { label: "Projets", glyph: "folder" },
-    media: { label: "Médias", glyph: "play" },
+    projects: { get label() { return L("Projets", "Projects"); }, glyph: "folder" },
+    media: { get label() { return L("Médias", "Media"); }, glyph: "play" },
   };
   el.innerHTML = `
     <div class="finder">
       <aside>
-        <p class="side-h">Favoris</p>
+        <p class="side-h">${L("Favoris", "Favourites")}</p>
         ${Object.entries(sections).map(([k, v]) => `<button class="side-link" data-sec="${k}">${GLYPHS[v.glyph].replace(/fill="#fff"/g, 'fill="#0a84ff"')}${v.label}</button>`).join("")}
-        <p class="side-h">Liens</p>
+        <p class="side-h">${L("Liens", "Links")}</p>
         <a class="side-link" href="${PROFILE.instagram.url}" target="_blank" rel="noopener">${LINK_ICONS.instagram}Instagram</a>
         <a class="side-link" href="${PROFILE.linkedin}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#0a84ff"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4v11H3zM9.5 9.5h3.8v1.6c.6-1 1.9-1.9 3.8-1.9 4 0 4.4 2.6 4.4 5.9v5.4h-4v-4.8c0-1.2 0-2.7-1.7-2.7s-2 1.3-2 2.6v4.9h-4z"/></svg>LinkedIn</a>
         <a class="side-link" href="mailto:${PROFILE.email}">${GLYPHS.mail.replace('stroke="#fff"', 'stroke="#0a84ff"')}E-mail</a>
@@ -609,13 +628,13 @@ function renderFinder(el) {
     if (sec === "all" || sec === "docs") { const ids = ["about", "skills", "contact", "cv"]; n += ids.length; parts.push(`<h3 class="fi-h">Documents</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
     if (sec === "all" || sec === "projects") {
       n += PROJECTS.length + 1;
-      parts.push(`<h3 class="fi-h">Projets</h3><div class="fi-grid">${fileBtn("projects")}${PROJECTS.map((p) => `
+      parts.push(`<h3 class="fi-h">${L("Projets", "Projects")}</h3><div class="fi-grid">${fileBtn("projects")}${PROJECTS.map((p) => `
         <button class="fi-file" data-open="project:${p.slug}"><span class="fi-icon fi-thumb" style="background-image:url('${p.thumb}')"></span><span class="fi-name">${p.title}</span></button>`).join("")}</div>`);
     }
-    if (sec === "all" || sec === "media") { const ids = ["videos", "moodboard"]; n += ids.length; parts.push(`<h3 class="fi-h">Médias</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
+    if (sec === "all" || sec === "media") { const ids = ["videos", "moodboard"]; n += ids.length; parts.push(`<h3 class="fi-h">${L("Médias", "Media")}</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
     main.innerHTML = parts.join("");
     main.querySelectorAll(".fi-file").forEach((f, i) => f.style.setProperty("--i", i));
-    status.textContent = `${n} éléments`;
+    status.textContent = `${n} ${L("éléments", "items")}`;
   };
   el.addEventListener("click", (e) => { const b = e.target.closest("[data-sec]"); if (b) show(b.dataset.sec); });
   show("all");
@@ -648,7 +667,7 @@ function renderVideos(el, win) {
         <div class="vid-info"></div>
       </div>
       <aside class="vid-list">
-        <p class="vid-list-h">${VIDEOS.length} vidéos</p>
+        <p class="vid-list-h">${VIDEOS.length} ${L("vidéos", "videos")}</p>
         ${VIDEOS.map((v, i) => {
           const p = PROJECTS.find((x) => x.slug === v.project);
           return `<button class="vid-item" data-id="${v.id}" style="--i:${i}">
@@ -674,8 +693,8 @@ function renderVideos(el, win) {
       <div class="vid-foot">
         <div class="vid-tags">${(v.tags || []).map((t) => `<span>${t}</span>`).join("")}</div>
         <div class="vid-links">
-          ${p ? `<button class="vid-link" data-open="project:${p.slug}">Voir le projet</button>` : ""}
-          <a class="vid-link" href="${videoUrl(v)}" target="_blank" rel="noopener">Ouvrir sur ${PLATFORM[v.platform]} ↗</a>
+          ${p ? `<button class="vid-link" data-open="project:${p.slug}">${L("Voir le projet", "View project")}</button>` : ""}
+          <a class="vid-link" href="${videoUrl(v)}" target="_blank" rel="noopener">${L("Ouvrir sur", "Open on")} ${PLATFORM[v.platform]} ↗</a>
         </div>
       </div>`;
     info.classList.remove("in"); void info.offsetWidth; info.classList.add("in");
@@ -711,16 +730,16 @@ function renderMoodboard(el, win) {
   el.innerHTML = `
     <header class="pin-top">
       <img class="pin-logo" src="assets/logos/pinterest.png" alt="Pinterest">
-      <div class="pin-search">${GLYPHS.star.replace('fill="#fff"', 'fill="#767676"')}<span>Direction artistique de ${PROFILE.name}</span></div>
-      <a class="pin-follow" href="${MOODBOARDS.profile}" target="_blank" rel="noopener">Voir mon Pinterest</a>
+      <div class="pin-search">${GLYPHS.star.replace('fill="#fff"', 'fill="#767676"')}<span>${L("Direction artistique de", "Art direction by")} ${PROFILE.name}</span></div>
+      <a class="pin-follow" href="${MOODBOARDS.profile}" target="_blank" rel="noopener">${L("Voir mon Pinterest", "See my Pinterest")}</a>
     </header>
     <div class="pin-profile">
       <img class="pin-avatar" src="${PROFILE.avatar}" alt="">
-      <h1>Direction artistique</h1>
-      <p>Moodboards et recherches visuelles · ${boards.length} tableaux · ${total} épingles</p>
+      <h1>${L("Direction artistique", "Art direction")}</h1>
+      <p>${L("Moodboards et recherches visuelles", "Moodboards & visual research")} · ${boards.length} ${L("tableaux", "boards")} · ${total} ${L("épingles", "pins")}</p>
     </div>
     <nav class="pin-tabs" role="tablist">
-      <button class="pin-tab" data-board="all">Tous</button>
+      <button class="pin-tab" data-board="all">${L("Tous", "All")}</button>
       ${boards.map((b) => `<button class="pin-tab" data-board="${b.id}">${b.name}</button>`).join("")}
     </nav>
     <div class="pin-grid"></div>
@@ -737,8 +756,8 @@ function renderMoodboard(el, win) {
     for (let i = 0; i < max; i++) sel.forEach((b) => b.pins[i] && list.push({ b, p: b.pins[i] }));
     grid.innerHTML = list.map(({ b, p }, i) => `
       <div class="pin" role="button" tabindex="0" data-i="${i}" style="--c:${p[3]};--i:${i % 12};aspect-ratio:${p[1]} / ${p[2]}">
-        <img src="${pinImg(p[0])}" alt="Épingle du tableau ${b.name}" loading="lazy">
-        <a class="pin-save" href="${b.url}" target="_blank" rel="noopener">Ouvrir</a>
+        <img src="${pinImg(p[0])}" alt="${L("Épingle du tableau", "Pin from board")} ${b.name}" loading="lazy">
+        <a class="pin-save" href="${b.url}" target="_blank" rel="noopener">${L("Ouvrir", "Open")}</a>
         <span class="pin-board">${b.name}</span>
       </div>`).join("");
     grid.querySelectorAll("img").forEach((img) => {
@@ -748,7 +767,7 @@ function renderMoodboard(el, win) {
     });
     setTimeout(() => grid.querySelectorAll(".pin:not(.in)").forEach((p) => p.classList.add("in")), 2500);
     more.innerHTML = sel.map((b) => `<a class="pin-more-btn" href="${b.url}" target="_blank" rel="noopener">
-      Voir les ${b.count} épingles de « ${b.name} » sur Pinterest ↗</a>`).join("");
+      ${L(`Voir les ${b.count} épingles de « ${b.name} » sur Pinterest`, `See all ${b.count} pins of “${b.name}” on Pinterest`)} ↗</a>`).join("");
     el.scrollTo({ top: 0 });
   };
 
@@ -771,7 +790,7 @@ function renderMoodboard(el, win) {
       img.style.aspectRatio = `${p[1]} / ${p[2]}`;
       img.onload = () => img.classList.add("in");
       img.src = pinImg(p[0], "736x");
-      cap.innerHTML = `<span>${b.name}</span><span>${i + 1} / ${list.length}</span><a href="${b.url}" target="_blank" rel="noopener">Voir le tableau ↗</a>`;
+      cap.innerHTML = `<span>${b.name}</span><span>${i + 1} / ${list.length}</span><a href="${b.url}" target="_blank" rel="noopener">${L("Voir le tableau", "View board")} ↗</a>`;
     };
     const close = () => { lb.classList.remove("show"); document.removeEventListener("keydown", key); setTimeout(() => lb.remove(), 300); };
     const key = (e) => { if (e.key === "Escape") close(); if (e.key === "ArrowRight") go(i + 1); if (e.key === "ArrowLeft") go(i - 1); };
@@ -831,7 +850,7 @@ function renderSkills(el) {
           <ul>${CERTIFICATIONS.map((c) => `<li><span class="medal">★</span>${c}</li>`).join("")}</ul>
         </div>
         <div class="extra-card" data-a="up" style="--d:2050ms">
-          <h3>Langues</h3>
+          <h3>${L("Langues", "Languages")}</h3>
           <ul>${LANGUAGES.map((l) => `<li><strong>${l.name}</strong><span>${l.level}</span></li>`).join("")}</ul>
         </div>
       </div>
@@ -857,13 +876,13 @@ function renderContact(el) {
       </div>
       <div class="contact-bottom" data-a="up" style="--d:1200ms">
         <a class="mail" href="mailto:${PROFILE.email}">${PROFILE.email}</a>
-        <button class="copy" id="copy-mail" aria-label="Copier l'adresse e-mail">Copier</button>
+        <button class="copy" id="copy-mail" aria-label="${L("Copier l'adresse e-mail", "Copy email address")}">${L("Copier", "Copy")}</button>
       </div>
     </section>`;
   $("#copy-mail", el).addEventListener("click", async (e) => {
-    try { await navigator.clipboard.writeText(PROFILE.email); e.target.textContent = "Copié ✓"; }
-    catch { e.target.textContent = "Sélectionne l'adresse"; }
-    setTimeout(() => (e.target.textContent = "Copier"), 1800);
+    try { await navigator.clipboard.writeText(PROFILE.email); e.target.textContent = L("Copié ✓", "Copied ✓"); }
+    catch { e.target.textContent = L("Sélectionne l'adresse", "Select the address"); }
+    setTimeout(() => (e.target.textContent = L("Copier", "Copy")), 1800);
   });
   setupAnims(el);
 }
@@ -875,13 +894,13 @@ function renderCV(el) {
       <span class="pv-name">${PROFILE.cvFileName || "CV.pdf"}</span>
       <div class="pv-actions">
         <button class="pv-btn" id="pv-zoom" aria-label="Zoomer">Zoom +</button>
-        <a class="pv-btn" href="${PROFILE.cv}" target="_blank" rel="noopener">Ouvrir le PDF</a>
-        <a class="pv-btn primary" href="${PROFILE.cv}" download="${PROFILE.cvFileName || "CV.pdf"}">Télécharger</a>
+        <a class="pv-btn" href="${PROFILE.cv}" target="_blank" rel="noopener">${L("Ouvrir le PDF", "Open PDF")}</a>
+        <a class="pv-btn primary" href="${PROFILE.cv}" download="${PROFILE.cvFileName || "CV.pdf"}">${L("Télécharger", "Download")}</a>
       </div>
     </div>
     <div class="pv-stage">
       <div class="pv-sheet" data-a="rise" style="--d:150ms">
-        <img src="${PROFILE.cvPreview}" alt="CV de ${PROFILE.name}">
+        <img src="${PROFILE.cvPreview}" alt="CV ${PROFILE.name}">
       </div>
     </div>`;
   const stage = $(".pv-stage", el);
@@ -953,11 +972,92 @@ function renderTerminal(el) {
 }
 
 /* ---------- Horloge ---------- */
-const clockFmt = new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
-function tick() { $("#clock").textContent = clockFmt.format(new Date()).replace(",", ""); }
+const clockFmt = () => new Intl.DateTimeFormat(LANG === "en" ? "en-GB" : "fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+function tick() { $("#clock").textContent = clockFmt().format(new Date()).replace(",", ""); }
 
 /* ---------- Démarrage ---------- */
 document.title = `${PROFILE.fullName || PROFILE.name} — Portfolio`;
+
+/* ---------- Changer de langue ---------- */
+function setLang(l) {
+  if (l === LANG) return;
+  LANG = l;
+  try { localStorage.setItem("lang", l); } catch {}
+  applyData();
+  updateChrome();
+  closeSkillPop();
+  document.querySelector(".menu-pop")?.remove();
+  document.querySelector(".notif")?.remove();
+  // re-dessine chaque fenêtre ouverte dans la nouvelle langue
+  openWindows.forEach((win, id) => {
+    const app = getApp(id);
+    if (!app) return;
+    $(".title", win).textContent = app.title;
+    win.setAttribute("aria-label", app.title);
+    win.querySelector(".light.close").setAttribute("aria-label", L("Fermer", "Close"));
+    win.querySelector(".light.min").setAttribute("aria-label", L("Réduire", "Minimise"));
+    win.querySelector(".light.max").setAttribute("aria-label", L("Agrandir", "Maximise"));
+    const old = $(".content", win), fresh = document.createElement("div");
+    fresh.className = "content";
+    old.replaceWith(fresh);
+    app.render(fresh, win);
+    fresh.animate([{ opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "none" }], { duration: 450, easing: "ease-out" });
+  });
+  const focused = winLayer.querySelector(".window.focused");
+  menuApp.textContent = focused ? getApp(focused.dataset.id)?.title.replace(/\.\w+$/, "") : "Finder";
+}
+
+function updateChrome() {
+  document.querySelectorAll("[data-fr]").forEach((el) => (el.textContent = el.dataset[LANG]));
+  document.querySelectorAll("#lang-toggle [data-l]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.l === LANG));
+  $("#lang-toggle").classList.toggle("en", LANG === "en");
+  iconsEl.querySelectorAll(".icon").forEach((ic) => ($(".label", ic).textContent = APPS[ic.dataset.app].title));
+  dock.querySelectorAll(".dock-item").forEach((it) => {
+    const d = DOCK_ITEMS.find((x) => x !== "sep" && (x.id === it.dataset.app || (x.skill && x.skill === it.dataset.skill)));
+    if (d) { it.dataset.label = d.label; it.setAttribute("aria-label", d.label); }
+  });
+  tick();
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("#lang-toggle");
+  if (b) setLang(LANG === "fr" ? "en" : "fr");
+});
+
+/* ---------- Sélection au lasso sur le bureau (comme sur Mac) ---------- */
+(() => {
+  let box = null, sx = 0, sy = 0, icons = [];
+  desktop.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0 || e.pointerType === "touch") return;
+    if (!(e.target === desktop || e.target === winLayer || e.target === iconsEl)) return;
+    const r = desktop.getBoundingClientRect();
+    sx = e.clientX - r.left; sy = e.clientY - r.top;
+    box = document.createElement("div");
+    box.className = "lasso";
+    desktop.appendChild(box);
+    icons = [...iconsEl.querySelectorAll(".icon")];
+    desktop.setPointerCapture(e.pointerId);
+  });
+  desktop.addEventListener("pointermove", (e) => {
+    if (!box) return;
+    const r = desktop.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.clientX - r.left, r.width)), y = Math.max(0, Math.min(e.clientY - r.top, r.height));
+    const L0 = Math.min(sx, x), T0 = Math.min(sy, y), W = Math.abs(x - sx), H = Math.abs(y - sy);
+    Object.assign(box.style, { left: L0 + "px", top: T0 + "px", width: W + "px", height: H + "px" });
+    const sel = { l: L0 + r.left, t: T0 + r.top, r: L0 + W + r.left, b: T0 + H + r.top };
+    icons.forEach((ic) => {
+      const b = $(".img", ic).getBoundingClientRect();
+      ic.classList.toggle("selected", !(b.right < sel.l || b.left > sel.r || b.bottom < sel.t || b.top > sel.b));
+    });
+  });
+  const end = () => {
+    if (!box) return;
+    const b = box; box = null;
+    b.classList.add("out");
+    setTimeout(() => b.remove(), 200);
+  };
+  desktop.addEventListener("pointerup", end);
+  desktop.addEventListener("pointercancel", end);
+})();
 
 /* ---------- Menu Aide ---------- */
 function toggleHelp(btn) {
@@ -966,18 +1066,18 @@ function toggleHelp(btn) {
   const pop = document.createElement("div");
   pop.className = "menu-pop";
   pop.innerHTML = `
-    <p class="mp-title">Comment naviguer</p>
+    <p class="mp-title">${L("Comment naviguer", "How to navigate")}</p>
     <ul>
-      <li><span>🖱️</span>Clique sur un fichier du bureau ou une icône du Dock pour l'ouvrir.</li>
-      <li><span>🔍</span>Le <strong>Finder</strong> (premier du Dock) donne accès à tout le portfolio.</li>
-      <li><span>🪟</span>Déplace les fenêtres par leur barre de titre, double-clique pour agrandir.</li>
-      <li><span>🔴</span>Les boutons rouge / jaune / vert ferment, réduisent et agrandissent.</li>
-      <li><span>🎬</span>Dans les projets, les captures et les boutons sont cliquables.</li>
+      <li><span>🖱️</span>${L("Clique sur un fichier du bureau ou une icône du Dock pour l'ouvrir.", "Click a file on the desktop or an icon in the Dock to open it.")}</li>
+      <li><span>🔍</span>${L("Le <strong>Finder</strong> (premier du Dock) donne accès à tout le portfolio.", "The <strong>Finder</strong> (first in the Dock) gives access to the whole portfolio.")}</li>
+      <li><span>🪟</span>${L("Déplace les fenêtres par leur barre de titre, double-clique pour agrandir.", "Drag windows by their title bar, double-click to maximise.")}</li>
+      <li><span>🔴</span>${L("Les boutons rouge / jaune / vert ferment, réduisent et agrandissent.", "The red / yellow / green buttons close, minimise and maximise.")}</li>
+      <li><span>🎬</span>${L("Dans les projets, les captures et les boutons sont cliquables.", "In projects, screenshots and buttons are clickable.")}</li>
     </ul>
     <div class="mp-sep"></div>
-    <button data-open="finder">Ouvrir le Finder</button>
-    <button data-open="contact">Me contacter</button>
-    <button data-open="cv">Voir mon CV</button>`;
+    <button data-open="finder">${L("Ouvrir le Finder", "Open Finder")}</button>
+    <button data-open="contact">${L("Me contacter", "Contact me")}</button>
+    <button data-open="cv">${L("Voir mon CV", "View my CV")}</button>`;
   document.body.appendChild(pop);
   const r = btn.getBoundingClientRect();
   pop.style.left = Math.min(r.left - 8, window.innerWidth - pop.offsetWidth - 8) + "px";
@@ -999,11 +1099,11 @@ function showAvailability() {
   n.innerHTML = `
     <img class="notif-avatar" src="${PROFILE.avatar}" alt="">
     <div class="notif-body">
-      <div class="notif-top"><strong>${a.title}</strong><span>maintenant</span></div>
+      <div class="notif-top"><strong>${a.title}</strong><span>${L("maintenant", "now")}</span></div>
       <p>${a.text}</p>
       <div class="notif-actions">
-        <button class="notif-btn primary" data-open="contact">Me contacter</button>
-        <button class="notif-btn" data-open="cv">Voir le CV</button>
+        <button class="notif-btn primary" data-open="contact">${L("Me contacter", "Contact me")}</button>
+        <button class="notif-btn" data-open="cv">${L("Voir le CV", "View CV")}</button>
       </div>
     </div>
     <button class="notif-close" aria-label="Fermer">×</button>`;
@@ -1023,4 +1123,5 @@ renderDesktopIcons();
 renderDock();
 tick();
 setInterval(tick, 10_000);
+updateChrome();
 if (!isMobile()) setTimeout(() => openWindow("about"), 300);

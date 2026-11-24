@@ -28,12 +28,16 @@
   <header id="menubar">
     <div class="menu-left">
       <strong id="menu-app">Finder</strong>
-      <span class="menu-extra">Fichier</span>
-      <span class="menu-extra">Édition</span>
-      <span class="menu-extra">Présentation</span>
-      <button class="menu-item" id="menu-help">Aide</button>
+      <span class="menu-extra" data-fr="Fichier" data-en="File">Fichier</span>
+      <span class="menu-extra" data-fr="Édition" data-en="Edit">Édition</span>
+      <span class="menu-extra" data-fr="Présentation" data-en="View">Présentation</span>
+      <button class="menu-item" id="menu-help" data-fr="Aide" data-en="Help">Aide</button>
     </div>
     <div class="menu-right">
+      <button id="lang-toggle" class="lang-toggle" aria-label="Langue / Language">
+        <span class="lt-knob"></span>
+        <span data-l="fr">FR</span><span data-l="en">EN</span>
+      </button>
       <span id="clock"></span>
     </div>
   </header>
@@ -48,6 +52,7 @@
   <nav id="dock" aria-label="Dock"></nav>
 
   <script src="data.js"></script>
+  <script src="data-en.js"></script>
   <script src="assets/projets/slides.js"></script>
   <script src="script.js"></script>
 </body>
