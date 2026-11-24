@@ -251,6 +251,13 @@ const MOODBOARDS = {
   ],
 };
 
+// Spotify : les 3 artistes que j'écoute en ce moment (id = fin du lien Spotify de l'artiste)
+const MUSIC = [
+  { id: "5blvB6N3OACeH0gJL9BRqf", fav: "Kitle" },
+  { id: "6M2wZ9GZgrQXHCFfjv46we", fav: "Go Easy" },
+  { id: "5ZZsFnpO7frU8h5xH1wtjT", fav: "Do You Love Me" },
+];
+
 const SKILLS = [
   "Stratégie de communication & de marque",
   "Social media & community management",

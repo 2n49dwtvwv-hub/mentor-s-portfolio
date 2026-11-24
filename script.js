@@ -55,6 +55,7 @@ const GLYPHS = {
   notes: `<img src="assets/logos/notes.png" alt="">`,
   finder: `<img src="assets/logos/finder.png" alt="">`,
   quicktime: `<img src="assets/logos/quicktime.png" alt="">`,
+  spotify: `<svg viewBox="0 0 24 24" fill="#1ed760"><circle cx="12" cy="12" r="12" fill="#000"/><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>`,
   play: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
   terminal: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l4 4-4 4M12 17h7"/></svg>`,
   trash: `<svg viewBox="0 0 24 24"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a9aa0"/><stop offset=".5" stop-color="#d9d9de"/><stop offset="1" stop-color="#8e8e94"/></linearGradient></defs><path d="M5 6.5h14l-1.3 13.2a1.5 1.5 0 0 1-1.5 1.3H7.8a1.5 1.5 0 0 1-1.5-1.3z" fill="url(#tg)" opacity=".9"/><ellipse cx="12" cy="6.5" rx="7.4" ry="1.6" fill="#77777d"/><path d="M8.5 9.5l.6 9M12 9.5v9M15.5 9.5l-.6 9" stroke="#6e6e74" stroke-width=".7"/></svg>`,
@@ -81,6 +82,7 @@ const APPS = {
   skills:   { get title() { return L("Compétences.txt", "Skills.txt"); }, icon: "doc",     w: 860, h: 600, render: renderSkills },
   contact:  { title: "Contact.vcf",     icon: "contact", w: 880, h: 580, render: renderContact },
   videos:   { get title() { return L("Vidéos", "Videos"); },          icon: "movie",   w: 1040, h: 720, render: renderVideos, dark: true },
+  spotify:  { title: "Spotify", icon: null, w: 980, h: 660, render: renderSpotify, dark: true },
   moodboard:{ get title() { return L("Direction artistique", "Art direction"); }, icon: "pinterest", w: 1060, h: 780, render: renderMoodboard },
   cv:       { title: "CV.pdf",          icon: "pdf",     w: 640, h: 860, render: renderCV },
   terminal: { title: `${PROFILE.username} — zsh`, icon: null, w: 600, h: 380, render: renderTerminal, dark: true },
@@ -110,6 +112,7 @@ const DOCK_ITEMS = [
   { id: "contact",  label: "Contact",     glyph: "mailapp",  bg: "transparent", plain: true },
   { id: "videos",   get label() { return L("Vidéos", "Videos"); },      glyph: "quicktime", bg: "transparent", plain: true },
   { id: "moodboard", get label() { return L("Direction artistique", "Art direction"); }, glyph: "pinterest", bg: "#fff" },
+  { id: "spotify",  label: "Spotify",     glyph: "spotify",  bg: "#000" },
   "sep",
   { id: "cv",       label: "CV",          glyph: "preview",  bg: "transparent", plain: true },
   "sep",
@@ -600,7 +603,7 @@ function renderProject(el, p) {
 function renderFinder(el) {
   const fileBtn = (id) => {
     const app = APPS[id];
-    return `<button class="fi-file" data-open="${id}"><span class="fi-icon">${ICONS[app.icon]}</span><span class="fi-name">${app.title}</span></button>`;
+    return `<button class="fi-file" data-open="${id}"><span class="fi-icon">${app.icon ? ICONS[app.icon] : GLYPHS[id]}</span><span class="fi-name">${app.title}</span></button>`;
   };
   const sections = {
     all: { get label() { return L("Tout", "All"); }, glyph: "star" },
@@ -631,13 +634,54 @@ function renderFinder(el) {
       parts.push(`<h3 class="fi-h">${L("Projets", "Projects")}</h3><div class="fi-grid">${fileBtn("projects")}${PROJECTS.map((p) => `
         <button class="fi-file" data-open="project:${p.slug}"><span class="fi-icon fi-thumb" style="background-image:url('${p.thumb}')"></span><span class="fi-name">${p.title}</span></button>`).join("")}</div>`);
     }
-    if (sec === "all" || sec === "media") { const ids = ["videos", "moodboard"]; n += ids.length; parts.push(`<h3 class="fi-h">${L("Médias", "Media")}</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
+    if (sec === "all" || sec === "media") { const ids = ["videos", "moodboard", "spotify"]; n += ids.length; parts.push(`<h3 class="fi-h">${L("Médias", "Media")}</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
     main.innerHTML = parts.join("");
     main.querySelectorAll(".fi-file").forEach((f, i) => f.style.setProperty("--i", i));
     status.textContent = `${n} ${L("éléments", "items")}`;
   };
   el.addEventListener("click", (e) => { const b = e.target.closest("[data-sec]"); if (b) show(b.dataset.sec); });
   show("all");
+}
+
+/* ---------- Spotify : ce que j'écoute ---------- */
+function renderSpotify(el) {
+  el.classList.add("spot-app");
+  el.innerHTML = `
+    <div class="spot">
+      <aside class="spot-side">
+        <div class="spot-brand">${GLYPHS.spotify}<span>Spotify</span></div>
+        <p class="spot-h">${L("En ce moment", "On repeat")}</p>
+        ${MUSIC.map((m, i) => `<button class="spot-item" data-i="${i}" style="--i:${i}">
+            <span class="spot-num">${i + 1}</span>
+            <span class="spot-meta"><strong>${m.name || L("Artiste", "Artist") + " " + (i + 1)}</strong><span>♥ ${m.fav}</span></span>
+            <span class="spot-eq"><i></i><i></i><i></i></span>
+          </button>`).join("")}
+      </aside>
+      <div class="spot-main">
+        <header class="spot-hero">
+          <img src="${PROFILE.avatar}" alt="">
+          <div>
+            <span>${L("Playlist", "Playlist")}</span>
+            <h1>${L("Ce que j'écoute", "What I'm listening to")}</h1>
+            <p>${PROFILE.name} · ${MUSIC.length} ${L("artistes", "artists")}</p>
+          </div>
+        </header>
+        <div class="spot-player"></div>
+        <p class="spot-fav"></p>
+      </div>
+    </div>`;
+  const player = $(".spot-player", el), fav = $(".spot-fav", el);
+  const select = (i) => {
+    const m = MUSIC[i];
+    el.querySelectorAll(".spot-item").forEach((b) => b.classList.toggle("active", +b.dataset.i === i));
+    player.innerHTML = `<iframe src="https://open.spotify.com/embed/artist/${m.id}?utm_source=generator&theme=0"
+      title="Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+    fav.innerHTML = `${L("Mon titre préféré", "My favourite track")} : <strong>${m.fav}</strong> ·
+      <a href="https://open.spotify.com/artist/${m.id}" target="_blank" rel="noopener">${L("Ouvrir dans Spotify", "Open in Spotify")} ↗</a>`;
+    player.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 500, easing: "cubic-bezier(.16,1,.3,1)" });
+  };
+  el.addEventListener("click", (e) => { const b = e.target.closest(".spot-item"); if (b) select(+b.dataset.i); });
+  select(0);
 }
 
 /* ---------- Application « Vidéos » (façon QuickTime) ---------- */
