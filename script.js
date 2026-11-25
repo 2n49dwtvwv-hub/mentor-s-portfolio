@@ -1163,10 +1163,39 @@ function showAvailability() {
   n.addEventListener("mouseleave", () => { hover = false; setTimeout(() => !hover && n.isConnected && close(), 4000); });
   setTimeout(() => !hover && n.isConnected && close(), 12000);
 }
-setTimeout(showAvailability, isMobile() ? 900 : 1600);
 renderDesktopIcons();
 renderDock();
 tick();
 setInterval(tick, 10_000);
 updateChrome();
-if (!isMobile()) setTimeout(() => openWindow("about"), 300);
+/* ---------- Démarrage façon Mac ---------- */
+(() => {
+  const boot = $("#boot");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let seen = false;
+  try { seen = sessionStorage.getItem("booted") === "1"; } catch {}
+  const start = () => {
+    if (!isMobile()) setTimeout(() => openWindow("about"), 900);
+    setTimeout(showAvailability, isMobile() ? 1400 : 2400);
+  };
+  const finish = () => {
+    if (!boot || boot.classList.contains("done")) return;
+    try { sessionStorage.setItem("booted", "1"); } catch {}
+    boot.classList.add("done");
+    document.body.classList.remove("booting");
+    document.body.classList.add("waking");
+    setTimeout(() => { boot.remove(); document.body.classList.remove("waking"); }, 2200);
+    start();
+  };
+  if (!boot || seen || reduce) {
+    boot?.remove();
+    document.body.classList.remove("booting");
+    if (!isMobile()) setTimeout(() => openWindow("about"), 300);
+    setTimeout(showAvailability, isMobile() ? 900 : 1600);
+    return;
+  }
+  boot.addEventListener("click", finish);
+  // la barre se remplit, puis le bureau apparaît
+  requestAnimationFrame(() => boot.classList.add("run"));
+  setTimeout(finish, 2600);
+})();
