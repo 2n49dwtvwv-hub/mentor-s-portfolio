@@ -18,6 +18,8 @@ const PROFILE = {
   // Texte de "À propos" (tu peux utiliser <strong>, <em>, <u>)
   bio: [
     "Je suis Mentor. J'observe, j'imagine, je crée. Je collectionne les images, les idées et les histoires qui méritent d'être racontées.",
+    "<strong>Filmer, c'est ma passion depuis toujours.</strong> Depuis très longtemps, une chose m'attire plus que tout : <strong><u>raconter des histoires à travers des images.</u></strong> J'aime imaginer des récits qui touchent les gens, au point qu'ils adhèrent au produit, puis à la marque tout entière.",
+    "Mon terrain de jeu préféré : <strong>donner une vraie personnalité aux marques</strong>. Construire leur identité, leur univers visuel, leur branding, pour qu'on les reconnaisse au premier regard et qu'on ait envie d'en faire partie.",
     "<strong>Ce qui m'anime ?</strong> Trouver le détail qui fait la différence, l'idée qui donne du sens, <strong><em><u>l'image qui arrête le regard.</u></em></strong>",
     "J'aime naviguer entre stratégie et créativité. Comprendre l'ADN d'une marque, imaginer son territoire d'expression, construire son univers et lui donner vie à travers des concepts, <strong><u>des images et des histoires.</u></strong>",
     "Je crois aux marques qui ont <u>une personnalité</u>, aux idées qui bousculent et aux images qui racontent plus que les mots.",

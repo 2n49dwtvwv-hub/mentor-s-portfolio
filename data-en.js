@@ -12,6 +12,8 @@ const DATA_EN = {
     },
     bio: [
       "I'm Mentor. I observe, I imagine, I create. I collect images, ideas and stories that deserve to be told.",
+      "<strong>Filming has always been my passion.</strong> For as long as I can remember, one thing has drawn me in more than anything: <strong><u>telling stories through images.</u></strong> I love crafting narratives that move people, to the point where they buy into the product, and then into the whole brand.",
+      "My favourite playground: <strong>giving brands a real personality</strong>. Building their identity, their visual universe, their branding, so they're recognisable at first glance and people want to be part of them.",
       "<strong>What drives me?</strong> Finding the detail that makes the difference, the idea that gives meaning, <strong><em><u>the image that stops the scroll.</u></em></strong>",
       "I love moving between strategy and creativity. Understanding a brand's DNA, imagining its territory of expression, building its universe and bringing it to life through concepts, <strong><u>images and stories.</u></strong>",
       "I believe in brands with <u>a personality</u>, in ideas that shake things up and in images that say more than words.",
