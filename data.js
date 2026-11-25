@@ -290,22 +290,22 @@ const PHOTOS = [
 // « Ce que je sais faire » (suite de l'onglet Compétences)
 const SAVOIR_FAIRE = [
   {
-    id: "montage", title: "Montage", photo: "assets/savoir-faire/materiel.webp", sticker: "sparkles.webp",
+    id: "montage", title: "Montage", photo: "assets/savoir-faire/materiel.webp", sticker: "stk-paint.webp", sticker2: "stk-burst.webp",
     text: "Je monte tous les formats : du vlog à la vidéo très dynamique, avec un style propre à chaque marque pour qu'on la reconnaisse immédiatement.",
     items: ["Motion design", "Cuts dynamiques", "Vlogs", "Formats courts (Reels, TikTok, Shorts)", "Formats longs YouTube", "Étalonnage & sound design"],
   },
   {
-    id: "tournage", title: "Tournage", photo: "assets/savoir-faire/tournage-voiture.webp", photo2: "assets/savoir-faire/camera-main.webp", sticker: "star.webp",
+    id: "tournage", title: "Tournage", photo: "assets/savoir-faire/tournage-voiture.webp", photo2: "assets/savoir-faire/camera-main.webp", sticker: "stk-burst.webp",
     text: "Sur un tournage, je gère à peu près tout, seul ou en équipe : de la préparation au dernier plan.",
     items: ["Cadrage", "Prise de son", "Lumière", "Direction des talents", "Matériel : Sony, Sigma 24-70, RØDE"],
   },
   {
-    id: "strategie", title: "Stratégie de communication", photo: "assets/savoir-faire/montage.webp", sticker: "coin.webp",
+    id: "strategie", title: "Stratégie de communication", photo: "assets/savoir-faire/montage.webp", sticker: "stk-cloud.webp",
     text: "Je pars toujours de l'entreprise elle-même : son organisation, son ADN et le message qu'elle veut faire passer, pour construire une stratégie de communication cohérente.",
     steps: ["Analyser la structure et l'organisation de l'entreprise", "Comprendre son ADN et le message à faire passer", "Définir les cibles et le territoire de marque", "Construire la stratégie et le plan de communication", "Créer les contenus et mesurer les résultats"],
   },
   {
-    id: "moodboards", title: "Moodboards & identité de marque", photo: "assets/moodboard/photo-video-01.webp", sticker: "smiley.webp",
+    id: "moodboards", title: "Moodboards & identité de marque", photo: "assets/moodboard/photo-video-01.webp", sticker: "stk-smiley.webp", sticker2: "stk-cloud.webp",
     text: "Avant chaque projet, je construis des moodboards sur Freeform pour poser l'univers visuel : branding, identité de marque, personal branding.",
     items: ["Branding", "Identité visuelle", "Personal branding", "Direction artistique"],
     boards: [

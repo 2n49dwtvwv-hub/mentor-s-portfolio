@@ -971,7 +971,8 @@ function renderSkills(el) {
           <div class="know-media" data-a="${i % 2 ? "drop" : "reveal"}" style="--r:${i % 2 ? 3 : -3}deg">
             <img src="${k.photo}" alt="" loading="lazy">
             ${k.photo2 ? `<img class="know-photo2" src="${k.photo2}" alt="" loading="lazy">` : ""}
-            ${sticker(k.sticker, "know-stk", "pop", 600, i % 2 ? -10 : 12, 14)}
+            ${sticker(k.sticker, "know-stk " + k.sticker.replace(".webp", ""), "pop", 600, i % 2 ? -10 : 12, 14)}
+            ${k.sticker2 ? sticker(k.sticker2, "know-stk2 " + k.sticker2.replace(".webp", ""), "pop", 800, i % 2 ? 8 : -8, 20) : ""}
           </div>
           <div class="know-text">
             <span class="know-n" data-a="up">0${i + 1}</span>

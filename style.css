@@ -957,6 +957,12 @@ a.side-link svg { color: #0a84ff; }
 .know-photo2 { position: absolute; width: 45% !important; aspect-ratio: 9 / 16 !important; right: -10%; bottom: -10%; border: 6px solid #f6f4ef; transform: rotate(6deg); }
 .know-stk { width: 18%; left: -6%; top: -6%; }
 .know.rev .know-stk { left: auto; right: -6%; }
+.know-stk.stk-paint { width: 13%; top: 8%; left: -9%; }
+.know-stk.stk-cloud { width: 34%; top: -8%; }
+.know-stk.stk-smiley { width: 22%; }
+.know-stk2 { width: 22%; right: -8%; bottom: 6%; }
+.know.rev .know-stk2 { right: auto; left: -8%; }
+.know-stk2.stk-cloud { width: 32%; bottom: -6%; }
 .know-n { display: block; font-weight: 900; color: #c9a227; font-size: 14px; }
 .know-text h3 { font: italic 900 clamp(20px, 3.4cqi, 28px) "Poppins", var(--font); text-transform: uppercase; margin: 2px 0 10px; }
 .know-text p { font-size: 15px; line-height: 1.65; }
