@@ -1003,7 +1003,7 @@ function renderContact(el) {
       </div>
       <div class="contact-stage">
         <div class="fuji" data-a="zoom" style="--d:100ms"><img src="${A}photo-fuji.webp" alt=""></div>
-        <img class="t-ensemble" src="${A}title-ensemble.webp" alt="On devrait travailler ensemble ?" data-a="wipe" style="--d:500ms" data-depth="8">
+        <img class="t-ensemble" src="${A}title-ensemble.webp?v=202611251942" alt="On devrait travailler ensemble ?" data-a="wipe" style="--d:500ms" data-depth="8">
         ${sticker("sparkles.webp", "sparkles", "pop", 1100, 0, 16)}
         ${sticker("smiley.webp", "smiley", "stamp", 1300, -8, 12)}
       </div>
