@@ -57,6 +57,7 @@ const GLYPHS = {
   quicktime: `<img src="assets/logos/quicktime.png" alt="">`,
   spotify: `<svg viewBox="0 0 24 24" fill="#1ed760"><circle cx="12" cy="12" r="12" fill="#000"/><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>`,
   spotifyapp: `<img src="assets/logos/spotify.png" alt="">`,
+  photos: `<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5.5" fill="#fff"/><g style="mix-blend-mode:multiply"><ellipse cx="12" cy="6.2" rx="2.6" ry="5.2" fill="#f9c440" opacity=".85" transform="rotate(0 12 12)"/><ellipse cx="12" cy="6.2" rx="2.6" ry="5.2" fill="#f79a2e" opacity=".85" transform="rotate(45 12 12)"/><ellipse cx="12" cy="6.2" rx="2.6" ry="5.2" fill="#f0553b" opacity=".85" transform="rotate(90 12 12)"/><ellipse cx="12" cy="6.2" rx="2.6" ry="5.2" fill="#e5397f" opacity=".85" transform="rotate(135 12 12)"/><ellipse cx="12" cy="6.2" rx="2.6" ry="5.2" fill="#a64bd6" opacity=".85" transform="rotate(180 12 12)"/><ellipse cx="12" cy="6.2" rx="2.6" ry="5.2" fill="#4f73e8" opacity=".85" transform="rotate(225 12 12)"/><ellipse cx="12" cy="6.2" rx="2.6" ry="5.2" fill="#33b6e8" opacity=".85" transform="rotate(270 12 12)"/><ellipse cx="12" cy="6.2" rx="2.6" ry="5.2" fill="#5ccf5a" opacity=".85" transform="rotate(315 12 12)"/></g></svg>`,
   play: `<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
   terminal: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l4 4-4 4M12 17h7"/></svg>`,
   trash: `<svg viewBox="0 0 24 24"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a9aa0"/><stop offset=".5" stop-color="#d9d9de"/><stop offset="1" stop-color="#8e8e94"/></linearGradient></defs><path d="M5 6.5h14l-1.3 13.2a1.5 1.5 0 0 1-1.5 1.3H7.8a1.5 1.5 0 0 1-1.5-1.3z" fill="url(#tg)" opacity=".9"/><ellipse cx="12" cy="6.5" rx="7.4" ry="1.6" fill="#77777d"/><path d="M8.5 9.5l.6 9M12 9.5v9M15.5 9.5l-.6 9" stroke="#6e6e74" stroke-width=".7"/></svg>`,
@@ -83,6 +84,7 @@ const APPS = {
   skills:   { get title() { return L("Compétences.txt", "Skills.txt"); }, icon: "doc",     w: 860, h: 600, render: renderSkills },
   contact:  { title: "Contact.vcf",     icon: "contact", w: 880, h: 580, render: renderContact },
   videos:   { get title() { return L("Vidéos", "Videos"); },          icon: "movie",   w: 1040, h: 720, render: renderVideos, dark: true },
+  photos:   { title: "Photos", icon: null, w: 1000, h: 700, render: renderPhotos },
   spotify:  { title: "Spotify", icon: null, w: 980, h: 660, render: renderSpotify, dark: true },
   moodboard:{ get title() { return L("Direction artistique", "Art direction"); }, icon: "pinterest", w: 1060, h: 780, render: renderMoodboard },
   cv:       { title: "CV.pdf",          icon: "pdf",     w: 640, h: 860, render: renderCV },
@@ -113,6 +115,7 @@ const DOCK_ITEMS = [
   { id: "contact",  label: "Contact",     glyph: "mailapp",  bg: "transparent", plain: true },
   { id: "videos",   get label() { return L("Vidéos", "Videos"); },      glyph: "quicktime", bg: "transparent", plain: true },
   { id: "moodboard", get label() { return L("Direction artistique", "Art direction"); }, glyph: "pinterest", bg: "#fff" },
+  { id: "photos",   label: "Photos",      glyph: "photos",   bg: "transparent", plain: true },
   { id: "spotify",  label: "Spotify",     glyph: "spotifyapp", bg: "transparent", plain: true },
   "sep",
   { id: "cv",       label: "CV",          glyph: "preview",  bg: "transparent", plain: true },
@@ -635,13 +638,73 @@ function renderFinder(el) {
       parts.push(`<h3 class="fi-h">${L("Projets", "Projects")}</h3><div class="fi-grid">${fileBtn("projects")}${PROJECTS.map((p) => `
         <button class="fi-file" data-open="project:${p.slug}"><span class="fi-icon fi-thumb" style="background-image:url('${p.thumb}')"></span><span class="fi-name">${p.title}</span></button>`).join("")}</div>`);
     }
-    if (sec === "all" || sec === "media") { const ids = ["videos", "moodboard", "spotify"]; n += ids.length; parts.push(`<h3 class="fi-h">${L("Médias", "Media")}</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
+    if (sec === "all" || sec === "media") { const ids = ["photos", "videos", "moodboard", "spotify"]; n += ids.length; parts.push(`<h3 class="fi-h">${L("Médias", "Media")}</h3><div class="fi-grid">${ids.map(fileBtn).join("")}</div>`); }
     main.innerHTML = parts.join("");
     main.querySelectorAll(".fi-file").forEach((f, i) => f.style.setProperty("--i", i));
     status.textContent = `${n} ${L("éléments", "items")}`;
   };
   el.addEventListener("click", (e) => { const b = e.target.closest("[data-sec]"); if (b) show(b.dataset.sec); });
   show("all");
+}
+
+/* ---------- Photos (triées par couleur) ---------- */
+function photoOrder(mode) {
+  const list = [...PHOTOS];
+  if (mode === "color") return list.sort((a, b) => a.order - b.order);
+  return list;
+}
+function renderPhotos(el) {
+  el.classList.add("ph-app");
+  let mode = "color";
+  el.innerHTML = `
+    <div class="ph">
+      <aside class="ph-side">
+        <p class="side-h">${L("Photos", "Photos")}</p>
+        <button class="side-link active" data-mode="color">${GLYPHS.photos}<span>${L("Par couleur", "By colour")}</span></button>
+        <button class="side-link" data-mode="all">${GLYPHS.photos}<span>${L("Bibliothèque", "Library")}</span></button>
+      </aside>
+      <div class="ph-main">
+        <header class="ph-head"><h1>${L("Bibliothèque", "Library")}</h1><span>${PHOTOS.length} ${L("photos", "photos")}</span></header>
+        <div class="ph-grid"></div>
+      </div>
+    </div>`;
+  const grid = $(".ph-grid", el);
+  let list = [];
+  const show = () => {
+    list = photoOrder(mode);
+    el.querySelectorAll("[data-mode]").forEach((b) => b.classList.toggle("active", b.dataset.mode === mode));
+    $(".ph-head h1", el).textContent = mode === "color" ? L("Par couleur", "By colour") : L("Bibliothèque", "Library");
+    grid.innerHTML = list.map((p, i) => `<button class="ph-item" data-i="${i}" style="--c:${p.color};--i:${i}">
+      <img src="assets/photos/${p.file}-thumb.webp" alt="${L(p.title, p.titleEn)}" loading="lazy"></button>`).join("");
+  };
+  const open = (i) => {
+    const lb = document.createElement("div");
+    lb.className = "pin-lightbox ph-lb";
+    lb.innerHTML = `<button class="lb-close" aria-label="${L("Fermer", "Close")}">×</button>
+      <button class="lb-nav prev" aria-label="←">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="lb-nav next" aria-label="→">›</button>`;
+    document.body.appendChild(lb);
+    const img = $("img", lb), cap = $("figcaption", lb);
+    const go = (k) => {
+      i = (k + list.length) % list.length; const p = list[i];
+      img.classList.remove("in"); img.style.setProperty("--c", p.color); img.style.aspectRatio = `${p.w} / ${p.h}`;
+      img.onload = () => img.classList.add("in"); img.src = `assets/photos/${p.file}.webp`;
+      lb.style.setProperty("--glow", p.color);
+      cap.innerHTML = `<span>${L(p.title, p.titleEn)}</span><span>${i + 1} / ${list.length}</span>`;
+    };
+    const close = () => { lb.classList.remove("show"); document.removeEventListener("keydown", key); setTimeout(() => lb.remove(), 300); };
+    const key = (e) => { if (e.key === "Escape") close(); if (e.key === "ArrowRight") go(i + 1); if (e.key === "ArrowLeft") go(i - 1); };
+    document.addEventListener("keydown", key);
+    lb.addEventListener("click", (e) => {
+      if (e.target.closest(".lb-close") || e.target === lb) close();
+      else if (e.target.closest(".prev")) go(i - 1); else if (e.target.closest(".next")) go(i + 1);
+    });
+    go(i); requestAnimationFrame(() => lb.classList.add("show"));
+  };
+  el.addEventListener("click", (e) => {
+    const m = e.target.closest("[data-mode]"); if (m) { mode = m.dataset.mode; return show(); }
+    const it = e.target.closest(".ph-item"); if (it) open(+it.dataset.i);
+  });
+  show();
 }
 
 /* ---------- Spotify : ce que j'écoute ---------- */

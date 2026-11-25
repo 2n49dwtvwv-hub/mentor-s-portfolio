@@ -947,6 +947,26 @@ a.side-link svg { color: #0a84ff; }
 .menu-pop button { display: block; width: 100%; text-align: left; padding: 6px 8px; border: 0; border-radius: 6px; background: none; font: inherit; cursor: pointer; }
 .menu-pop button:hover { background: var(--blue); color: #fff; }
 
+/* --- Photos --- */
+.content.ph-app { background: #fff; container-type: inline-size; overflow: hidden; font-family: var(--font); }
+.ph { display: grid; grid-template-columns: 190px 1fr; height: 100%; }
+.ph-side { padding: 12px 8px; background: #f3f3f6; border-right: 1px solid #e3e3e8; }
+.ph-side .side-link svg { width: 16px; height: 16px; }
+.ph-main { overflow: auto; padding: 0 18px 20px; }
+.ph-head { position: sticky; top: 0; z-index: 2; display: flex; align-items: baseline; gap: 10px; padding: 16px 0 12px; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); }
+.ph-head h1 { font-size: 22px; font-weight: 700; }
+.ph-head span { font-size: 13px; color: #8e8e93; }
+.ph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 3px; }
+.ph-item {
+  position: relative; aspect-ratio: 1; border: 0; padding: 0; overflow: hidden; cursor: zoom-in; background: var(--c);
+  animation: phIn .6s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(var(--i) * 40ms);
+}
+.ph-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.16, 1, .3, 1), filter .3s; }
+.ph-item:hover img { transform: scale(1.06); }
+.ph-item:hover { z-index: 1; box-shadow: 0 0 0 3px var(--c); }
+@keyframes phIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+.ph-lb { background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--glow, #222) 45%, transparent), rgba(10, 10, 12, .9) 70%); transition: opacity .3s, background .6s; }
+
 /* --- Spotify --- */
 .content.spot-app { background: #121212; color: #fff; container-type: inline-size; overflow: hidden; font-family: var(--font); }
 .spot { display: grid; grid-template-columns: 250px 1fr; height: 100%; }
@@ -1007,6 +1027,10 @@ a.side-link svg { color: #0a84ff; }
   .pin-grid { columns: 2; column-gap: 10px; padding: 0 10px; }
   .pin { margin-bottom: 10px; }
   .pin-follow { display: none; }
+  .ph { grid-template-columns: 1fr; }
+  .ph-side { display: flex; gap: 6px; padding: 8px; border-right: 0; border-bottom: 1px solid #e3e3e8; }
+  .ph-side .side-h { display: none; }
+  .ph-grid { grid-template-columns: repeat(3, 1fr); gap: 2px; }
   .spot { grid-template-columns: 1fr; height: auto; }
   .content.spot-app { overflow: auto; }
   .spot-side { padding: 12px 8px; }
@@ -1052,7 +1076,7 @@ a.side-link svg { color: #0a84ff; }
   .finder aside { display: none; }
   .finder-main { grid-template-columns: repeat(2, 1fr); padding: 14px; }
   #dock { height: auto; gap: 2px; padding: 5px 5px 7px; max-width: calc(100vw - 8px); }
-  .dock-item { --size: min(44px, calc((100vw - 60px) / 13.4)) !important; }
+  .dock-item { --size: min(44px, calc((100vw - 60px) / 14.2)) !important; }
   .dock-item[data-app="terminal"], .dock-item[data-app="trash"], .dock-sep:nth-last-child(2) { display: none; }
   .dock-item::before { display: none; }
   .dock-sep { height: 30px; margin: 0 2px 4px; }
