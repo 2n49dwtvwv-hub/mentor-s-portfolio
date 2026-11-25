@@ -295,7 +295,7 @@ const SAVOIR_FAIRE = [
     items: ["Motion design", "Cuts dynamiques", "Vlogs", "Formats courts (Reels, TikTok, Shorts)", "Formats longs YouTube", "Étalonnage & sound design"],
   },
   {
-    id: "tournage", title: "Tournage", photo: "assets/savoir-faire/tournage-voiture.webp", photo2: "assets/savoir-faire/camera-main.webp", sticker: "stk-burst.webp",
+    id: "tournage", title: "Tournage", photo: "assets/savoir-faire/tournage-voiture.webp", photo2: "assets/savoir-faire/camera-main.webp", sticker: "stk-burst.webp", sticker2: "stk-film.webp",
     text: "Sur un tournage, je gère à peu près tout, seul ou en équipe : de la préparation au dernier plan.",
     items: ["Cadrage", "Prise de son", "Lumière", "Direction des talents", "Matériel : Sony, Sigma 24-70, RØDE"],
   },
@@ -309,8 +309,8 @@ const SAVOIR_FAIRE = [
     text: "Avant chaque projet, je construis des moodboards sur Freeform pour poser l'univers visuel : branding, identité de marque, personal branding.",
     items: ["Branding", "Identité visuelle", "Personal branding", "Direction artistique"],
     boards: [
-      { name: "Aiko Curly Care", url: "https://www.icloud.com/freeform-copy/B8813B5E-508A-454F-BF72-D6180A9FC655" },
-      { name: "Concept Chrome", url: "https://www.icloud.com/freeform-copy/FF8176F9-C8C8-4579-B347-353CF70A76CB" },
+      { name: "Aiko Curly Care", img: "assets/savoir-faire/moodboard-aiko.webp", url: "https://www.icloud.com/freeform-copy/B8813B5E-508A-454F-BF72-D6180A9FC655" },
+      { name: "Concept Chrome", img: "assets/savoir-faire/moodboard-chrome.webp", url: "https://www.icloud.com/freeform-copy/FF8176F9-C8C8-4579-B347-353CF70A76CB" },
     ],
   },
 ];

@@ -969,7 +969,9 @@ function renderSkills(el) {
       ${SAVOIR_FAIRE.map((k, i) => `
         <article class="know ${i % 2 ? "rev" : ""}">
           <div class="know-media" data-a="${i % 2 ? "drop" : "reveal"}" style="--r:${i % 2 ? 3 : -3}deg">
-            <img src="${k.photo}" alt="" loading="lazy">
+            ${k.boards?.[0]?.img
+              ? `<div class="mb-stack">${k.boards.map((b, j) => `<a class="mb-card" href="${b.url}" target="_blank" rel="noopener" style="--j:${j}"><img src="${b.img}" alt="Moodboard ${b.name}" loading="lazy"><span>${L("Ouvrir dans Freeform", "Open in Freeform")} ↗</span></a>`).join("")}</div>`
+              : `<img src="${k.photo}" alt="" loading="lazy">`}
             ${k.photo2 ? `<img class="know-photo2" src="${k.photo2}" alt="" loading="lazy">` : ""}
             ${sticker(k.sticker, "know-stk " + k.sticker.replace(".webp", ""), "pop", 600, i % 2 ? -10 : 12, 14)}
             ${k.sticker2 ? sticker(k.sticker2, "know-stk2 " + k.sticker2.replace(".webp", ""), "pop", 800, i % 2 ? 8 : -8, 20) : ""}
