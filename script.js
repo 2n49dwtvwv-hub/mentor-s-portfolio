@@ -660,8 +660,7 @@ function renderPhotos(el) {
     <div class="ph">
       <aside class="ph-side">
         <p class="side-h">${L("Photos", "Photos")}</p>
-        <button class="side-link active" data-mode="color">${GLYPHS.photos}<span>${L("Par couleur", "By colour")}</span></button>
-        <button class="side-link" data-mode="all">${GLYPHS.photos}<span>${L("Bibliothèque", "Library")}</span></button>
+        <button class="side-link active" data-mode="color">${GLYPHS.photos}<span>${L("Toutes les photos", "All photos")}</span></button>
       </aside>
       <div class="ph-main">
         <header class="ph-head"><h1>${L("Bibliothèque", "Library")}</h1><span>${PHOTOS.length} ${L("photos", "photos")}</span></header>
@@ -673,7 +672,7 @@ function renderPhotos(el) {
   const show = () => {
     list = photoOrder(mode);
     el.querySelectorAll("[data-mode]").forEach((b) => b.classList.toggle("active", b.dataset.mode === mode));
-    $(".ph-head h1", el).textContent = mode === "color" ? L("Par couleur", "By colour") : L("Bibliothèque", "Library");
+    $(".ph-head h1", el).textContent = L("Mes photos", "My photos");
     grid.innerHTML = list.map((p, i) => `<button class="ph-item" data-i="${i}" style="--c:${p.color};--i:${i}">
       <img src="assets/photos/${p.file}-thumb.webp" alt="${L(p.title, p.titleEn)}" loading="lazy"></button>`).join("");
   };
