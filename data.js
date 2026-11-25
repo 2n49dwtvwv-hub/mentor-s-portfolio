@@ -261,13 +261,17 @@ const MUSIC = [
 // App Photos : mes photos (fichiers dans assets/photos/). « order » = place dans le dégradé de couleurs (chaud → froid)
 const PHOTOS = [
   { file: "circuit", order: 1, title: "Circuit au coucher du soleil", titleEn: "Circuit at sunset", w: 900, h: 1600, hue: 5, light: 0.18, color: "#342a29" },
-  { file: "portrait", order: 4, title: "Portrait", titleEn: "Portrait", w: 900, h: 1600, hue: 33, light: 0.54, color: "#988b7c" },
-  { file: "plage", order: 5, title: "Tournage sur la plage", titleEn: "Filming on the beach", w: 900, h: 1600, hue: 198, light: 0.60, color: "#939a9e", neutral: true },
-  { file: "okinawa", order: 7, title: "Okinawa la nuit", titleEn: "Okinawa at night", w: 1125, h: 1500, hue: 30, light: 0.30, color: "#514c47", neutral: true },
+  { file: "portrait", order: 5, title: "Portrait", titleEn: "Portrait", w: 900, h: 1600, hue: 33, light: 0.54, color: "#988b7c" },
+  { file: "plage", order: 7, title: "Tournage sur la plage", titleEn: "Filming on the beach", w: 900, h: 1600, hue: 198, light: 0.60, color: "#939a9e", neutral: true },
+  { file: "okinawa", order: 11, title: "Okinawa la nuit", titleEn: "Okinawa at night", w: 1125, h: 1500, hue: 30, light: 0.30, color: "#514c47", neutral: true },
   { file: "tokyo-mugiwara", order: 2, title: "Mugiwara Store, Tokyo", titleEn: "Mugiwara Store, Tokyo", w: 1600, h: 1067, hue: 40, light: 0.25, color: "#52462c" },
   { file: "tokyo-distributeur", order: 0, title: "Distributeur, Tokyo", titleEn: "Vending machine, Tokyo", w: 1600, h: 1067, hue: 26, light: 0.33, color: "#69513e" },
   { file: "tokyo-metro", order: 3, title: "Métro de Tokyo", titleEn: "Tokyo subway", w: 1600, h: 1067, hue: 32, light: 0.21, color: "#463623" },
-  { file: "fuji", order: 6, title: "Mont Fuji", titleEn: "Mount Fuji", w: 1095, h: 615, hue: 186, light: 0.43, color: "#617577" },
+  { file: "fuji", order: 8, title: "Mont Fuji", titleEn: "Mount Fuji", w: 1500, h: 842, hue: 186, light: 0.43, color: "#617578" },
+  { file: "sous-l-eau", order: 10, title: "Sous l'eau", titleEn: "Underwater", w: 1600, h: 1200, hue: 0, light: 0.5, color: "#0391aa" },
+  { file: "baie", order: 9, title: "Baie turquoise", titleEn: "Turquoise bay", w: 844, h: 1125, hue: 0, light: 0.5, color: "#678083" },
+  { file: "saut", order: 6, title: "Saut sur la plage", titleEn: "Jump on the beach", w: 898, h: 1600, hue: 0, light: 0.5, color: "#71695a" },
+  { file: "paris", order: 4, title: "Tournage à Paris", titleEn: "Filming in Paris", w: 1125, h: 1500, hue: 0, light: 0.5, color: "#918d86" },
 ];
 
 const SKILLS = [
