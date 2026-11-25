@@ -6,7 +6,7 @@
 /* ---------- Langue (FR / EN) ---------- */
 let LANG = (() => { try { return localStorage.getItem("lang"); } catch { return null; } })() || "fr";
 const L = (fr, en) => (LANG === "en" ? en : fr);
-const DATA_FR = structuredClone({ PROFILE, PARCOURS, PROJECTS, VIDEOS, MOODBOARDS, SKILLS, SOFTWARE, LANGUAGES });
+const DATA_FR = structuredClone({ PROFILE, PARCOURS, PROJECTS, VIDEOS, MOODBOARDS, SKILLS, SOFTWARE, LANGUAGES, SAVOIR_FAIRE });
 function applyData() {
   const src = structuredClone(DATA_FR);
   const en = LANG === "en" && typeof DATA_EN !== "undefined" ? DATA_EN : null;
@@ -18,6 +18,7 @@ function applyData() {
   SKILLS.splice(0, SKILLS.length, ...(en ? en.SKILLS : src.SKILLS));
   SOFTWARE.forEach((x, i) => Object.assign(x, src.SOFTWARE[i], en?.SOFTWARE[x.id] || {}));
   LANGUAGES.splice(0, LANGUAGES.length, ...(en ? en.LANGUAGES : src.LANGUAGES));
+  SAVOIR_FAIRE.forEach((x, i) => Object.assign(x, src.SAVOIR_FAIRE[i], en?.SAVOIR_FAIRE?.[x.id] || {}));
   document.documentElement.lang = LANG;
 }
 applyData();
@@ -961,6 +962,26 @@ function renderSkills(el) {
           <ul>${LANGUAGES.map((l) => `<li><strong>${l.name}</strong><span>${l.level}</span></li>`).join("")}</ul>
         </div>
       </div>
+      <div class="scroll-hint" data-a="up" style="--d:2300ms">${L("Ce que je sais faire ↓", "What I can do ↓")}</div>
+    </section>
+    <section class="page know-page">
+      <h2 class="know-title" data-a="wipe">${L("Ce que je sais faire", "What I can do")}</h2>
+      ${SAVOIR_FAIRE.map((k, i) => `
+        <article class="know ${i % 2 ? "rev" : ""}">
+          <div class="know-media" data-a="${i % 2 ? "drop" : "reveal"}" style="--r:${i % 2 ? 3 : -3}deg">
+            <img src="${k.photo}" alt="" loading="lazy">
+            ${k.photo2 ? `<img class="know-photo2" src="${k.photo2}" alt="" loading="lazy">` : ""}
+            ${sticker(k.sticker, "know-stk", "pop", 600, i % 2 ? -10 : 12, 14)}
+          </div>
+          <div class="know-text">
+            <span class="know-n" data-a="up">0${i + 1}</span>
+            <h3 data-a="up" style="--d:100ms">${k.title}</h3>
+            <p data-a="up" style="--d:200ms">${k.text}</p>
+            ${k.items ? `<ul class="know-tags">${k.items.map((t, j) => `<li data-a="pop" style="--d:${300 + j * 70}ms">${t}</li>`).join("")}</ul>` : ""}
+            ${k.steps ? `<ol class="know-steps">${k.steps.map((t, j) => `<li data-a="up" style="--d:${300 + j * 110}ms"><span>${j + 1}</span>${t}</li>`).join("")}</ol>` : ""}
+            ${k.boards ? `<div class="know-boards">${k.boards.map((b, j) => `<a class="proj-btn" href="${b.url}" target="_blank" rel="noopener" data-a="up" style="--d:${700 + j * 100}ms">${L("Moodboard", "Moodboard")} ${b.name} ↗</a>`).join("")}</div>` : ""}
+          </div>
+        </article>`).join("")}
     </section>`;
   setupAnims(el);
 }

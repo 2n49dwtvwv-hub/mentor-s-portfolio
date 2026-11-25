@@ -91,6 +91,17 @@ const DATA_EN = {
 
   MOODBOARDS: { "photo-video": "Photo & video — all projects" },
 
+  SAVOIR_FAIRE: {
+    montage: { title: "Editing", text: "I edit every format: from vlogs to high-energy videos, with a style unique to each brand so it's instantly recognisable.",
+      items: ["Motion design", "Dynamic cuts", "Vlogs", "Short-form (Reels, TikTok, Shorts)", "Long-form YouTube", "Colour grading & sound design"] },
+    tournage: { title: "Filming", text: "On set, I handle pretty much everything, solo or with a crew: from prep to the last shot.",
+      items: ["Framing", "Sound recording", "Lighting", "Directing talent", "Gear: Sony, Sigma 24-70, RØDE"] },
+    strategie: { title: "Communication strategy", text: "I always start from the company itself: its organisation, its DNA and the message it wants to convey, to build a consistent communication strategy.",
+      steps: ["Analyse the company's structure and organisation", "Understand its DNA and the message to convey", "Define targets and brand territory", "Build the strategy and communication plan", "Create content and measure results"] },
+    moodboards: { title: "Moodboards & brand identity", text: "Before every project, I build moodboards in Freeform to set the visual universe: branding, brand identity, personal branding.",
+      items: ["Branding", "Visual identity", "Personal branding", "Art direction"] },
+  },
+
   SKILLS: [
     "Communication & brand strategy",
     "Social media & community management",

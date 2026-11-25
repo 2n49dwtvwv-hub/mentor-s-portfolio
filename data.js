@@ -287,6 +287,34 @@ const PHOTOS = [
   { file: "coucher-mer", order: 8, title: "Coucher de soleil sur la mer", titleEn: "Sunset over the sea", w: 1200, h: 1600, hue: 0, light: 0.5, color: "#364056" },
 ];
 
+// « Ce que je sais faire » (suite de l'onglet Compétences)
+const SAVOIR_FAIRE = [
+  {
+    id: "montage", title: "Montage", photo: "assets/savoir-faire/materiel.webp", sticker: "sparkles.webp",
+    text: "Je monte tous les formats : du vlog à la vidéo très dynamique, avec un style propre à chaque marque pour qu'on la reconnaisse immédiatement.",
+    items: ["Motion design", "Cuts dynamiques", "Vlogs", "Formats courts (Reels, TikTok, Shorts)", "Formats longs YouTube", "Étalonnage & sound design"],
+  },
+  {
+    id: "tournage", title: "Tournage", photo: "assets/savoir-faire/tournage-voiture.webp", photo2: "assets/savoir-faire/camera-main.webp", sticker: "star.webp",
+    text: "Sur un tournage, je gère à peu près tout, seul ou en équipe : de la préparation au dernier plan.",
+    items: ["Cadrage", "Prise de son", "Lumière", "Direction des talents", "Matériel : Sony, Sigma 24-70, RØDE"],
+  },
+  {
+    id: "strategie", title: "Stratégie de communication", photo: "assets/savoir-faire/montage.webp", sticker: "coin.webp",
+    text: "Je pars toujours de l'entreprise elle-même : son organisation, son ADN et le message qu'elle veut faire passer, pour construire une stratégie de communication cohérente.",
+    steps: ["Analyser la structure et l'organisation de l'entreprise", "Comprendre son ADN et le message à faire passer", "Définir les cibles et le territoire de marque", "Construire la stratégie et le plan de communication", "Créer les contenus et mesurer les résultats"],
+  },
+  {
+    id: "moodboards", title: "Moodboards & identité de marque", photo: "assets/moodboard/photo-video-01.webp", sticker: "smiley.webp",
+    text: "Avant chaque projet, je construis des moodboards sur Freeform pour poser l'univers visuel : branding, identité de marque, personal branding.",
+    items: ["Branding", "Identité visuelle", "Personal branding", "Direction artistique"],
+    boards: [
+      { name: "Aiko Curly Care", url: "https://www.icloud.com/freeform-copy/B8813B5E-508A-454F-BF72-D6180A9FC655" },
+      { name: "Concept Chrome", url: "https://www.icloud.com/freeform-copy/FF8176F9-C8C8-4579-B347-353CF70A76CB" },
+    ],
+  },
+];
+
 const SKILLS = [
   "Stratégie de communication & de marque",
   "Social media & community management",
