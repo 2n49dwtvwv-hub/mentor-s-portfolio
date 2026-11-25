@@ -35,7 +35,7 @@ const PROFILE = {
   ],
   cv: "assets/cv.pdf",              // le PDF à télécharger
   cvPreview: "assets/cv-apercu.webp", // l'image affichée dans la fenêtre CV.pdf
-  cvFileName: "MUSTAFA_Mentor_CV.pdf",
+  cvFileName: "Mentor_MUSTAFA_CV.pdf",
 };
 
 const PARCOURS = [
@@ -340,8 +340,8 @@ const CERTIFICATIONS = ["Inside LVMH", "Editing 360"];
 const LANGUAGES = [
   { name: "Français", level: "Langue maternelle" },
   { name: "Albanais", level: "Langue maternelle" },
-  { name: "Anglais",  level: "C1+" },
-  { name: "Allemand", level: "B2+" },
+  { name: "Anglais",  level: "C2" },
+  { name: "Allemand", level: "A1" },
 ];
 
 const TOOLS = [

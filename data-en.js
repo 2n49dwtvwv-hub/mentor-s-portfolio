@@ -5,6 +5,9 @@
 
 const DATA_EN = {
   PROFILE: {
+    cv: "assets/cv-en.pdf",
+    cvPreview: "assets/cv-apercu-en.webp",
+    cvFileName: "Mentor_MUSTAFA_CV_EN.pdf",
     role: "Communication & brand strategy",
     availability: {
       title: "Looking for an internship",
@@ -123,7 +126,7 @@ const DATA_EN = {
   LANGUAGES: [
     { name: "French", level: "Native" },
     { name: "Albanian", level: "Native" },
-    { name: "English", level: "C1+" },
-    { name: "German", level: "B2+" },
+    { name: "English", level: "C2" },
+    { name: "German", level: "A1" },
   ],
 };
