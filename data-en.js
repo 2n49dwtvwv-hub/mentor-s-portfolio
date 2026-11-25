@@ -11,7 +11,7 @@ const DATA_EN = {
     role: "Communication & brand strategy",
     availability: {
       title: "Looking for an internship",
-      text: "In brand strategy, communication and visual & digital content creation, starting January 25, 2027.",
+      text: "4 to 6-month internship in brand strategy, communication and visual & digital content creation, starting January 25, 2027.",
     },
     bio: [
       "I'm Mentor. I observe, I imagine, I create. I collect images, ideas and stories that deserve to be told.",

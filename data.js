@@ -9,7 +9,7 @@ const PROFILE = {
   // Annonce affichée en notification à l'arrivée sur le site (mettre null pour la retirer)
   availability: {
     title: "Je recherche un stage",
-    text: "En stratégie de marque, communication et création de contenus visuels et digitaux, à partir du 25 janvier 2027.",
+    text: "Stage de 4 à 6 mois en stratégie de marque, communication et création de contenus visuels et digitaux, à partir du 25 janvier 2027.",
   },
   username: "mentor",               // utilisé dans le Terminal
   role: "Communication & stratégie de marque",
