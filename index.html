@@ -21,11 +21,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,900&display=swap">
-  <link rel="stylesheet" href="style.css?v=202611250744">
+  <link rel="stylesheet" href="style.css?v=202611250753">
 </head>
 <body class="booting">
   <!-- Écran de démarrage -->
-  <div id="boot" aria-hidden="true">
+  <div id="boot">
+    <button class="boot-power" aria-label="Allumer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v8"/><path d="M6.4 6.6a8 8 0 1 0 11.2 0"/></svg>
+    </button>
+    <p class="boot-hint" data-fr="Appuie pour allumer" data-en="Press to power on">Appuie pour allumer</p>
     <div class="boot-title">
       <img class="boot-logo" src="assets/slides/title-mentor.webp" alt="Mentor">
       <span class="boot-sub">'s portfolio</span>
@@ -65,9 +69,9 @@
   <!-- Dock -->
   <nav id="dock" aria-label="Dock"></nav>
 
-  <script src="data.js?v=202611250744"></script>
-  <script src="data-en.js?v=202611250744"></script>
-  <script src="assets/projets/slides.js?v=202611250744"></script>
-  <script src="script.js?v=202611250744"></script>
+  <script src="data.js?v=202611250753"></script>
+  <script src="data-en.js?v=202611250753"></script>
+  <script src="assets/projets/slides.js?v=202611250753"></script>
+  <script src="script.js?v=202611250753"></script>
 </body>
 </html>

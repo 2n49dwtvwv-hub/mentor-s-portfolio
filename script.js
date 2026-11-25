@@ -1168,6 +1168,41 @@ renderDock();
 tick();
 setInterval(tick, 10_000);
 updateChrome();
+/* ---------- Son de démarrage (original, généré par le navigateur) ---------- */
+function playChime() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ctx = new AC();
+    const now = ctx.currentTime + 0.05;
+    const master = ctx.createGain();
+    master.gain.setValueAtTime(0.0001, now);
+    master.gain.exponentialRampToValueAtTime(0.32, now + 0.04);
+    master.gain.exponentialRampToValueAtTime(0.0001, now + 3.6);
+    const filter = ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(5200, now);
+    filter.frequency.exponentialRampToValueAtTime(900, now + 3.2);
+    // petite réverbération maison
+    const delay = ctx.createDelay(); delay.delayTime.value = 0.17;
+    const fb = ctx.createGain(); fb.gain.value = 0.28;
+    delay.connect(fb); fb.connect(delay);
+    master.connect(filter); filter.connect(ctx.destination); filter.connect(delay); delay.connect(ctx.destination);
+    // accord de do majeur avec 9e : C3 G3 C4 E4 G4 D5
+    [130.81, 196.0, 261.63, 329.63, 392.0, 587.33].forEach((f, i) => {
+      [-4, 4].forEach((det) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = i < 2 ? "triangle" : "sine";
+        o.frequency.value = f; o.detune.value = det;
+        g.gain.value = (i < 2 ? 0.22 : 0.14) / (1 + i * 0.15);
+        o.connect(g); g.connect(master);
+        o.start(now + i * 0.012); o.stop(now + 3.8);
+      });
+    });
+    setTimeout(() => ctx.close(), 4500);
+  } catch {}
+}
+
 /* ---------- Démarrage façon Mac ---------- */
 (() => {
   const boot = $("#boot");
@@ -1194,8 +1229,21 @@ updateChrome();
     setTimeout(showAvailability, isMobile() ? 900 : 1600);
     return;
   }
-  boot.addEventListener("click", finish);
-  // la barre se remplit, puis le bureau apparaît
-  requestAnimationFrame(() => boot.classList.add("run"));
-  setTimeout(finish, 3000);
+  // 1) bouton d'allumage → 2) son + animation → 3) bureau (un clic pendant l'animation la passe)
+  const power = $(".boot-power", boot);
+  let running = false;
+  const powerOn = () => {
+    if (running) return;
+    running = true;
+    playChime();
+    boot.classList.add("run");
+    setTimeout(finish, 3000);
+  };
+  power.addEventListener("click", (e) => { e.stopPropagation(); powerOn(); });
+  boot.addEventListener("click", () => (running ? finish() : powerOn()));
+  document.addEventListener("keydown", function k(e) {
+    if (!boot.isConnected) return document.removeEventListener("keydown", k);
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); running ? finish() : powerOn(); }
+  });
+  power.focus({ preventScroll: true });
 })();
