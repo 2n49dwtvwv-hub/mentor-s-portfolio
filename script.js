@@ -1197,5 +1197,5 @@ updateChrome();
   boot.addEventListener("click", finish);
   // la barre se remplit, puis le bureau apparaît
   requestAnimationFrame(() => boot.classList.add("run"));
-  setTimeout(finish, 2600);
+  setTimeout(finish, 3000);
 })();
