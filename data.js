@@ -290,7 +290,7 @@ const PHOTOS = [
 // « Ce que je sais faire » (suite de l'onglet Compétences)
 const SAVOIR_FAIRE = [
   {
-    id: "montage", title: "Montage", photo: "assets/savoir-faire/materiel.webp", sticker: "stk-paint.webp", sticker2: "stk-burst.webp",
+    id: "montage", title: "Montage", photo: "assets/savoir-faire/materiel.webp", screens: ["assets/savoir-faire/timeline-2.webp", "assets/savoir-faire/timeline-1.webp"], sticker: "stk-paint.webp", sticker2: "stk-burst.webp",
     text: "Je monte tous les formats : du vlog à la vidéo très dynamique, avec un style propre à chaque marque pour qu'on la reconnaisse immédiatement.",
     items: ["Motion design", "Cuts dynamiques", "Vlogs", "Formats courts (Reels, TikTok, Shorts)", "Formats longs YouTube", "Étalonnage & sound design"],
   },

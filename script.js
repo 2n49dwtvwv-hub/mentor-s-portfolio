@@ -971,6 +971,8 @@ function renderSkills(el) {
           <div class="know-media" data-a="${i % 2 ? "drop" : "reveal"}" style="--r:${i % 2 ? 3 : -3}deg">
             ${k.boards?.[0]?.img
               ? `<div class="mb-stack">${k.boards.map((b, j) => `<a class="mb-card" href="${b.url}" target="_blank" rel="noopener" style="--j:${j}"><img src="${b.img}" alt="Moodboard ${b.name}" loading="lazy"><span>${L("Ouvrir dans Freeform", "Open in Freeform")} ↗</span></a>`).join("")}</div>`
+              : k.screens
+              ? `<div class="tl-stack">${k.screens.map((src) => `<figure class="tl-win"><span class="tl-bar"><i></i><i></i><i></i></span><img src="${src}" alt="${L("Timeline de montage", "Editing timeline")}" loading="lazy"></figure>`).join("")}</div>`
               : `<img src="${k.photo}" alt="" loading="lazy">`}
             ${k.photo2 ? `<img class="know-photo2" src="${k.photo2}" alt="" loading="lazy">` : ""}
             ${sticker(k.sticker, "know-stk " + k.sticker.replace(".webp", ""), "pop", 600, i % 2 ? -10 : 12, 14)}
